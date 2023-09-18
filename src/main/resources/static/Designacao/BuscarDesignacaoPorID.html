@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Designação Por ID</title>
+    <style>
+        :root {
+            --cor-fundo: rgb(34, 41, 47);
+            --cor-hover: rgb(118, 180, 145);
+            --cor-primaria: rgb(232, 253, 241);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dp-menu ul {
+            list-style-type: none;
+            padding: 0%;
+        }
+
+        .dp-menu ul {
+            background-color: var(--cor-fundo);
+        }
+
+        .dp-menu ul li {
+            display: inline;
+            position: relative;
+        }
+
+        .dp-menu ul a {
+            color: var(--cor-primaria);
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px;
+            transition: background .6s;
+        }
+
+        .dp-menu ul a:hover {
+            background-color: var(--cor-hover);
+        }
+
+        /*sub-menu*/
+        .dp-menu ul ul {
+            display: none;
+            left: 0;
+            position: absolute;
+        }
+
+        .dp-menu ul li:hover ul {
+            display: block;
+        }
+
+        .dp-menu ul ul {
+            width: 150px;
+        }
+
+        .dp-menu ul ul li a {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="dp-menu">
+    <ul>
+        <li><a href="http://localhost:8080">Home</a></li>
+
+        <!--Abrigo-->
+
+        <li><a href="#">Abrigo</a>
+            <ul>
+                <li><a href="http://localhost:8080/Abrigos/CadastrarAbrigos.html">Cadastro De Abrigos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarTodosAbrigos.html">Buscar Todos Abrigos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosAtivos.html">Buscar Abrigos Ativos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosInativos.html">Buscar Abrigos Inativos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosNomeOrdemCrescente.html">Buscar Abrigos (A-Z)</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosNomeOrdemDecrescente.html">Buscar Abrigos (Z-A)</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosCapacidadeOrdemCrescente.html">Buscar Abrigos Capacidade (+ -)</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosCapacidadeOrdemDecrescente.html">Buscar Abrigos Capacidade(- +)</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorEstado.html">Buscar Abrigos Por Estado</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorCidade.html">Buscar Abrigos Por Cidade</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorID.html">Buscar Abrigos Por ID</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorNome.html">Buscar Abrigos Por Nome</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorResponsavel.html">Buscar Abrigos Por Responsável</a></li>
+
+            </ul>
+        </li>
+
+        <!--Atendimento-->
+
+        <li><a href="#">Atendimento</a>
+            <ul>
+                <li><a href="http://localhost:8080/Atendimentos/CadastrarAtendimentos.html">Cadastrar Atendimentos</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarTodosAtendimentos.html">Buscar Todos Atendimentos</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorID.html">Buscar Atendimentos Por ID</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimnetosPorIdAbrigo.html">Buscar Atendimentos Por ID do Abrigo</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorIdPessoa.html">Buscar Atendimentos Por ID da Pessoa</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorResponsavel.html">Buscar Atendimentos Por Responsável</a></li>
+            </ul>
+        </li>
+
+        <!--Designação-->
+
+        <li><a href="#">Designação</a>
+            <ul>
+                <li><a href="CadastrarDesignacao.html">Cadastrar Designação</a></li>
+                <li><a href="BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
+                <li><a href="BuscarDesignacaoPorID.html">Buscar Designação Por Id</a></li>
+                <li><a href="BuscarDesignacaoPorIdAbrigo.html">Buscar Designação Por Id do Abrigo</a></li>
+                <li><a href="BuscarDesignacaoPorIdPessoa.html">Buscar Designação Por Id da Pessoa</a></li>
+                <li><a href="BuscarDesignacaoPorResponsavel.html">Buscar Designação Por Responsável</a></li>
+            </ul>
+        </li>
+
+        <li><a href="#">Pessoas</a>
+            <ul>
+                <li><a href="http://localhost:8080/Pessoas/CadastrarPessoas.html">Cadastrar Pessoas</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarTodasPessoas.html">Buscar Pessoas</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasOrdemCrescente.html">Buscar Pessoa(A-Z)</a></li>
+                <li><a href="http://localhost:8080/PessoasBuscarPessoasOrdemDecrescente.html">Buscar Pessoa(Z-A)</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorBairro.html">Buscar Pessoa Por Bairro</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCidade.html">Buscar Pessoa Por Cidade</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCpf.html">Buscar Pessoa Por Cpf</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorEstado.html">Buscar Pessoa Por Estado</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorGenero.html">Buscar Pessoa Por Genero</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorId.html">Buscar Pessoa Por Id</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorNome.html">Buscar Pessoa Por Nome</a></li>
+            </ul>
+        </li>
+
+        <!--Usuario-->
+
+        <li><a href="#">Usuários</a>
+            <ul>
+                <li><a href="http://localhost:8080/Usuarios/CadastrarUsuarios.html">Cadastrar Usuários</a></li>
+                <li><a href="http://localhost:8080/Usuarios/BuscarTodosUsuarios.html">Buscar Todos Usuários</a></li>
+                <li><a href="http://localhost:8080/Usuarios/BuscarUsuariosPorID.html">Buscar Usuários Por ID</a></li>
+                <li><a href="http://localhost:8080/Usuarios/BuscarUsuariosPorCPF.html">Buscar Usuários Por CPF</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<form onsubmit="event.preventDefault(); BuscarDesignacaoPorID();" id="buscar-form">
+    <label for="designacao_id">Digite o ID do Atendimento:</label>
+    <input type="number" id="designacao_id" name="designacao_id" placeholder="Digite aqui...">
+    <input type="submit" value="Buscar">
+</form>
+
+<table id="tabela-designacao">
+    <thead>
+    <tr>
+        <th>ID Designação</th>
+        <th>ID Abrigo</th>
+        <th>ID Pessoa</th>
+        <th>Data da Designação</th>
+        <th>Responsável</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Os dados serão carregados aqui dinamicamente -->
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function BuscarDesignacaoPorID() {
+        const designacao_id = document.getElementById('designacao_id').value;
+        const tabela = document.getElementById('tabela-designacao').getElementsByTagName('tbody')[0];
+        tabela.innerHTML = ''; // Limpar a tabela antes de preencher com os novos dados
+
+        axios.get(`http://localhost:8080/designacao/${designacao_id}`)
+            .then(response => {
+                const designacao = response.data;
+
+                if (designacao) {
+                    const row = tabela.insertRow();
+                    row.insertCell().innerText = designacao.designacao_id;
+                    row.insertCell().innerText = designacao.abrigo_id;
+                    row.insertCell().innerText = designacao.pessoa_id;
+                    row.insertCell().innerText = designacao.designacao_data;
+                    row.insertCell().innerText = designacao.designacao_responsavel;
+                } else {
+                    console.log('Nenhum atendimento encontrado com o ID fornecido.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao carregar o atendimento Por ID:', error);
+            });
+    }
+</script>
+</body>
+
+</html>
+
