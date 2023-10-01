@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
-    <title>Abrigo</title>
+    <title>Módulo de Abrigos</title>
     <style>
         :root {
             --cor-fundo : rgb(34,41,47);
             --cor-hover : rgb(118,180,145);
             --cor-primaria : rgb(232,253,241);
         }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
+
         .dp-menu ul{
             list-style-type: none;
-            padding: 0%;
+            padding: 0;
         }
-
 
         .dp-menu ul{
             background-color: var(--cor-fundo);
         }
 
-
         .dp-menu ul li{
             display: inline;
             position: relative;
         }
-
 
         .dp-menu ul a{
             color: var(--cor-primaria);
@@ -51,21 +49,17 @@
             position: absolute;
         }
 
-
         .dp-menu ul li:hover ul{
-            display: block; 
+            display: block;
         }
-
 
         .dp-menu ul ul{
             width: 150px;
         }
 
-
         .dp-menu ul ul li a{
             display: block;
         }
-   
 </style>
 </head>
 <body>
@@ -73,9 +67,8 @@
         <ul>
             <li><a href="http://localhost:8080">Home</a></li>
            
-            <!--Abrigo--> 
-
-            <li><a href="#">Abrigo</a>
+            <!--Abrigo-->
+            <li><a href="#">Abrigos</a>
                 <ul>
                     <li><a href="Abrigos/CadastrarAbrigos.html">Cadastro De Abrigos</a></li>
                     <li><a href="Abrigos/BuscarTodosAbrigos.html">Buscar Abrigos</a></li>
@@ -94,8 +87,7 @@
             </li>
             
             <!--Atendimento-->
-            
-            <li><a href="#">Atendimento</a>
+            <li><a href="#">Atendimentos</a>
                 <ul>
                     <li><a href="Atendimentos/CadastrarAtendimentos.html">Cadastrar Atendimentos</a></li>
                     <li><a href="Atendimentos/BuscarTodosAtendimentos.html">Buscar Todos Atendimentos</a></li>
@@ -107,8 +99,7 @@
             </li>
             
             <!--Designação-->
-
-            <li><a href="#">Designação</a>
+            <li><a href="#">Designações</a>
                 <ul>
                     <li><a href="Designacao/CadastrarDesignacao.html">Cadastrar Designação</a></li>
                     <li><a href="Designacao/BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
@@ -120,7 +111,6 @@
             </li>
 
             <!--Pessoas-->
-
             <li><a href="#">Pessoas</a>
                 <ul>
                     <li><a href="Pessoas/CadastrarPessoas.html">Cadastrar Pessoas</a></li>
@@ -134,12 +124,10 @@
                     <li><a href="Pessoas/BuscarPessoasPorGenero.html">Buscar Pessoa Por Genero</a></li>
                     <li><a href="Pessoas/BuscarPessoasPorId.html">Buscar Pessoa Por Id</a></li>
                     <li><a href="Pessoas/BuscarPessoasPorNome.html">Buscar Pessoa Por Nome</a></li>
-
                 </ul>
             </li>
 
             <!--Usuario-->
-
             <li><a href="#">Usuários</a>
                 <ul>
                     <li><a href="Usuarios/CadastrarUsuarios.html">Cadastrar Usuários</a></li>
@@ -150,7 +138,5 @@
             </li>
         </ul>
     </nav>
-    
-
 </body>
 </html>

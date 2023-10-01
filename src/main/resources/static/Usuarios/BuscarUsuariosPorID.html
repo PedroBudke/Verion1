@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,15 +64,13 @@
         }
     </style>
 </head>
-
 <body>
 <nav class="dp-menu">
     <ul>
         <li><a href="http://localhost:8080">Home</a></li>
 
         <!--Abrigo-->
-
-        <li><a href="#">Abrigo</a>
+        <li><a href="#">Abrigos</a>
             <ul>
                 <li><a href="http://localhost:8080/Abrigos/CadastrarAbrigos.html">Cadastro De Abrigos</a></li>
                 <li><a href="http://localhost:8080/Abrigos/BuscarTodosAbrigos.html">Buscar Todos Abrigos</a></li>
@@ -93,8 +90,7 @@
         </li>
 
         <!--Atendimento-->
-
-        <li><a href="#">Atendimento</a>
+        <li><a href="#">Atendimentos</a>
             <ul>
                 <li><a href="http://localhost:8080/Atendimentos/CadastrarAtendimentos.html">Cadastrar Atendimentos</a></li>
                 <li><a href="http://localhost:8080/Atendimentos/BuscarTodosAtendimentos.html">Buscar Todos Atendimentos</a></li>
@@ -106,8 +102,7 @@
         </li>
 
         <!--Designação-->
-
-        <li><a href="#">Designação</a>
+        <li><a href="#">Designações</a>
             <ul>
                 <li><a href="http://localhost:8080/Designacao/CadastrarDesignacao.html">Cadastrar Designação</a></li>
                 <li><a href="http://localhost:8080/Designacao/BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
@@ -118,6 +113,7 @@
             </ul>
         </li>
 
+        <!--Pessoas-->
         <li><a href="#">Pessoas</a>
             <ul>
                 <li><a href="http://localhost:8080/Pessoas/CadastrarPessoas.html">Cadastrar Pessoas</a></li>
@@ -135,20 +131,20 @@
         </li>
 
         <!--Usuario-->
-
         <li><a href="#">Usuários</a>
             <ul>
                 <li><a href="http://localhost:8080/Usuarios/CadastrarUsuarios.html">Cadastrar Usuários</a></li>
                 <li><a href="http://localhost:8080/Usuarios/BuscarTodosUsuarios.html">Buscar Todos Usuários</a></li>
                 <li><a href="BuscarUsuariosPorID.html">Buscar Usuários Por ID</a></li>
                 <li><a href="BuscarUsuariosPorCPF.html">Buscar Usuários Por CPF</a></li>
+                <li><a href="DeletarUsuariosPorID.html">Deletar Usuários Por ID</a></li>
             </ul>
         </li>
     </ul>
 </nav>
 
 <form onsubmit="event.preventDefault(); BuscarUsuariosPorID();" id="buscar-form">
-    <label for="usuario_id">Digite o id da Pessoa:</label>
+    <label for="usuario_id">Digite o ID da Pessoa:</label>
     <input type="number" id="usuario_id" name="usuario_id" placeholder="Digite aqui...">
     <input type="submit" value="Buscar">
 </form>
@@ -192,6 +188,5 @@
     }
 </script>
 </body>
-
 </html>
 

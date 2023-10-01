@@ -119,5 +119,4 @@ public class AbrigoController {
     public List<Abrigos> buscarAbrigoPorCidade(@RequestParam String abrigo_cidade) {
         return abrigoRepositorio.buscarAbrigoPorCidade(abrigo_cidade);
     }
-
 }

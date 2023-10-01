@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Usuario</title>
-</head>
-
-<style>
+    <title>Cadastrar Usuarios</title>
+    <style>
     :root {
         --cor-fundo: rgb(34, 41, 47);
         --cor-hover: rgb(118, 180, 145);
@@ -21,7 +18,7 @@
 
     .dp-menu ul {
         list-style-type: none;
-        padding: 0%;
+        padding: 0;
     }
 
     .dp-menu ul {
@@ -64,14 +61,14 @@
         display: block;
     }
 </style>
+</head>
 <body>
 <nav class="dp-menu">
     <ul>
         <li><a href="http://localhost:8080">Home</a></li>
 
         <!--Abrigo-->
-
-        <li><a href="#">Abrigo</a>
+        <li><a href="#">Abrigos</a>
             <ul>
                 <li><a href="http://localhost:8080/Abrigos/CadastrarAbrigos.html">Cadastro De Abrigos</a></li>
                 <li><a href="http://localhost:8080/Abrigos/BuscarTodosAbrigos.html">Buscar Abrigos</a></li>
@@ -90,8 +87,7 @@
         </li>
 
         <!--Atendimento-->
-
-        <li><a href="#">Atendimento</a>
+        <li><a href="#">Atendimentos</a>
             <ul>
                 <li><a href="http://localhost:8080/Atendimentos/CadastrarAtendimentos.html">Cadastrar Atendimentos</a></li>
                 <li><a href="http://localhost:8080/Atendimentos/BuscarTodosAtendimentos.html">Buscar Todos Atendimentos</a></li>
@@ -103,8 +99,7 @@
         </li>
 
         <!--Designação-->
-
-        <li><a href="#">Designação</a>
+        <li><a href="#">Designações</a>
             <ul>
                 <li><a href="http://localhost:8080/Designacao/CadastrarDesignacao.html">Cadastrar Designação</a></li>
                 <li><a href="http://localhost:8080/Designacao/BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
@@ -116,7 +111,6 @@
         </li>
 
         <!--Pessoas-->
-
         <li><a href="#">Pessoas</a>
             <ul>
                 <li><a href="http://localhost:8080/Pessoas/CadastrarPessoas.html">Cadastrar Pessoas</a></li>
@@ -134,13 +128,13 @@
         </li>
 
         <!--Usuario-->
-
         <li><a href="#">Usuários</a>
             <ul>
                 <li><a href="CadastrarUsuarios.html">Cadastrar Usuários</a></li>
                 <li><a href="BuscarTodosUsuarios.html">Buscar Todos Usuários</a></li>
                 <li><a href="BuscarUsuariosPorID.html">Buscar Usuários Por ID</a></li>
                 <li><a href="BuscarUsuariosPorCPF.html">Buscar Usuários Por CPF</a></li>
+                <li><a href="DeletarUsuariosPorID.html">Deletar Usuários Por ID</a></li>
             </ul>
         </li>
     </ul>
@@ -148,7 +142,7 @@
 <div class="form-container">
     <form id="usuarioForm">
         <fieldset class="grupo">
-            <h2>Cadastrar Usuário</h2>
+            <h2>Cadastrar Usuários</h2>
 
             <div class="field">
                 <span class="heading">CPF</span><br>
@@ -166,7 +160,6 @@
             </div>
 
             <button class="botao-enviar" type="submit">Enviar</button>
-
         </fieldset>
     </form>
 </div>
@@ -176,7 +169,6 @@
 <script>
     const form = document.getElementById('usuarioForm');
     const eventoList = document.getElementById('eventoList');
-
 
     function getUsuario() {
         axios.get('http://localhost:8080/usuario/todos')
@@ -195,11 +187,9 @@
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-
         const cpf = document.getElementById('cpf').value;
         const email = document.getElementById('email').value;
         const senhna = document.getElementById('senha').value;
-
         const data = {
             usuario_cpf: cpf,
             usuario_email: email,
@@ -216,9 +206,7 @@
                 console.error(error);
             });
     });
-
     getUsuario();
 </script>
 </body>
-
 </html>
