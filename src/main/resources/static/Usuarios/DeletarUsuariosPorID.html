@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Pessoas Por ID</title>
+    <style>
+        :root {
+            --cor-fundo: rgb(34, 41, 47);
+            --cor-hover: rgb(118, 180, 145);
+            --cor-primaria: rgb(232, 253, 241);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dp-menu ul {
+            list-style-type: none;
+            padding: 0%;
+        }
+
+        .dp-menu ul {
+            background-color: var(--cor-fundo);
+        }
+
+        .dp-menu ul li {
+            display: inline;
+            position: relative;
+        }
+
+        .dp-menu ul a {
+            color: var(--cor-primaria);
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px;
+            transition: background .6s;
+        }
+
+        .dp-menu ul a:hover {
+            background-color: var(--cor-hover);
+        }
+
+        /*sub-menu*/
+        .dp-menu ul ul {
+            display: none;
+            left: 0;
+            position: absolute;
+        }
+
+        .dp-menu ul li:hover ul {
+            display: block;
+        }
+
+        .dp-menu ul ul {
+            width: 150px;
+        }
+
+        .dp-menu ul ul li a {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="dp-menu">
+    <ul>
+        <li><a href="http://localhost:8080">Home</a></li>
+
+        <!--Abrigo-->
+
+        <li><a href="#">Abrigo</a>
+            <ul>
+                <li><a href="http://localhost:8080/Abrigos/CadastrarAbrigos.html">Cadastro De Abrigos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarTodosAbrigos.html">Buscar Abrigos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosAtivos.html">Buscar Abrigos Ativos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosInativos.html">Buscar Abrigos Inativos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosNomeOrdemCrescente.html">Buscar Abrigos (A-Z)</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosNomeOrdemDecrescente.html">Buscar Abrigos (Z-A)</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosCapacidadeOrdemCrescente.html">Buscar Abrigos Capacidade (+ -)</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosCapacidadeOrdemDecrescente.html">Buscar Abrigos Capacidade(- +)</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorEstado.html">Buscar Abrigos Por Estado</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorCidade.html">Buscar Abrigos Por Cidade</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorID.html">Buscar Abrigos Por ID</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorNome.html">Buscar Abrigos Por Nome</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosPorResponsavel.html">Buscar Abrigos Por Responsável</a></li>
+            </ul>
+        </li>
+
+        <!--Atendimento-->
+
+        <li><a href="#">Atendimento</a>
+            <ul>
+                <li><a href="http://localhost:8080/Atendimentos/CadastrarAtendimentos.html">Cadastrar Atendimentos</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarTodosAtendimentos.html">Buscar Todos Atendimentos</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorID.html">Buscar Atendimentos Por ID</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimnetosPorIdAbrigo.html">Buscar Atendimentos Por ID do Abrigo</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorIdPessoa.html">Buscar Atendimentos Por ID da Pessoa</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorResponsavel.html">Buscar Atendimentos Por Responsável</a></li>
+            </ul>
+        </li>
+
+        <!--Designação-->
+
+        <li><a href="#">Designação</a>
+            <ul>
+                <li><a href="http://localhost:8080/Designacao/CadastrarDesignacao.html">Cadastrar Designação</a></li>
+                <li><a href="http://localhost:8080/Designacao/BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
+                <li><a href="Bhttp://localhost:8080/Designacao/uscarDesignacaoPorID.html">Buscar Designação Por Id</a></li>
+                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdAbrigo.html">Buscar Designação Por Id do Abrigo</a></li>
+                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdPessoa.html">Buscar Designação Por Id da Pessoa</a></li>
+                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorResponsavel.html">Buscar Designação Por Responsável</a></li>
+                <li><a href="http://localhost:8080/Designacao/DeletarDesignacaoPorID.html">Deletar Designação Por ID</a></li>
+            </ul>
+        </li>
+
+        <!--Pessoas-->
+
+        <li><a href="#">Pessoas</a>
+            <ul>
+                <li><a href="http://localhost:8080/Pessoas/CadastrarPessoas.html">Cadastrar Pessoas</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarTodasPessoas.html">Buscar Pessoas</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasOrdemCrescente.html">Buscar Pessoa(A-Z)</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasOrdemDecrescente.html">Buscar Pessoa(Z-A)</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorBairro.html">Buscar Pessoa Por Bairro</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCidade.html">Buscar Pessoa Por Cidade</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCpf.html">Buscar Pessoa Por Cpf</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorEstado.html">Buscar Pessoa Por Estado</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorGenero.html">Buscar Pessoa Por Genero</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorId.html">Buscar Pessoa Por Id</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorNome.html">Buscar Pessoa Por Nome</a></li>
+            </ul>
+        </li>
+
+        <!--Usuario-->
+
+        <li><a href="#">Usuários</a>
+            <ul>
+                <li><a href="CadastrarUsuarios.html">Cadastrar Usuários</a></li>
+                <li><a href="BuscarTodosUsuarios.html">Buscar Todos Usuários</a></li>
+                <li><a href="BuscarUsuariosPorID.html">Buscar Usuários Por ID</a></li>
+                <li><a href="BuscarUsuariosPorCPF.html">Buscar Usuários Por CPF</a></li>
+                <li><a href="DeletarUsuariosPorID.html">Deletar Usuários Por ID</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<table id="tabela-usuario">
+    <thead>
+    <tr>
+        <th>ID Usuario</th>
+        <th>CPF</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Os dados serão carregados aqui dinamicamente -->
+    </tbody>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // Função para excluir um atendimento
+    function excluirUsuarios(usuario_id) {
+        axios.delete(`/usuario/${usuario_id}`)
+            .then(response => {
+                // Atualizar a tabela após a exclusão
+                BuscarTodosUsuarios();
+            })
+            .catch(error => {
+                console.error('Erro ao excluir o Usuario:', error);
+            });
+    }
+
+    // Função para preencher a tabela com os dados dos atendimentos
+    function preencherTabela(usuarios) {
+        const tabela = document.getElementById('tabela-usuario').getElementsByTagName('tbody')[0];
+        tabela.innerHTML = ''; // Limpar a tabela antes de preencher com os novos dados
+
+        usuarios.forEach(usuarios => {
+            const row = tabela.insertRow();
+            row.insertCell().innerText = usuarios.usuario_id;
+            row.insertCell().innerText = usuarios.usuario_cpf;
+            row.insertCell().innerText = usuarios.usuario_email;
+
+            // Adicionar um botão de exclusão
+            const cellAcoes = row.insertCell();
+            const btnExcluir = document.createElement('button');
+            btnExcluir.innerHTML = '<i class="fas fa-trash"></i> Excluir'; // Ícone de lixeira
+            btnExcluir.addEventListener('click', () => {
+                excluirUsuarios(usuarios.usuario_id);
+            });
+            cellAcoes.appendChild(btnExcluir);
+        });
+    }
+
+    // Função para buscar todos os atendimentos e preencher a tabela
+    function BuscarTodosUsuarios() {
+        axios.get(`/usuario/todos`)
+            .then(response => {
+                const usuarios = response.data;
+                preencherTabela(usuarios);
+            })
+            .catch(error => {
+                console.error('Erro ao carregar os Usuarios:', error);
+            });
+    }
+    // Chamar a função de busca quando a página carregar
+    BuscarTodosUsuarios();
+</script>
+</body>
+</html>
+
+
+
+
+
