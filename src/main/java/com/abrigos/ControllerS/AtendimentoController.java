@@ -48,7 +48,7 @@ public class AtendimentoController {
 
     //ALTERAR ATENDIMENTO
     @CrossOrigin(origins = "", allowedHeaders = "")
-    @PutMapping
+    @PutMapping("/{atendimento_id}")
     public Atendimentos alterarAtendimento(@RequestBody AtendimentoRequstDTO data) {
         Atendimentos atendimentos = new Atendimentos(data);
         if (data.atendimento_id() == null) {
