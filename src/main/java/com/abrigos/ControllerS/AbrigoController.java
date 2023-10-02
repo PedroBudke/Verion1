@@ -50,7 +50,7 @@ public class AbrigoController {
 
     //ALTERAR ABRIGO
     @CrossOrigin(origins = "", allowedHeaders = "")
-    @PutMapping
+    @PutMapping("/{abrigo_id}")
     public Abrigos alterarAbrigo(@RequestBody AbrigoRequestDTO data) {
         Abrigos abrigos = new Abrigos(data);
         if (data.abrigo_id() == null) {
