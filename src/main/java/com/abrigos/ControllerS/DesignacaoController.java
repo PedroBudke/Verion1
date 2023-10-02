@@ -48,7 +48,7 @@ public class DesignacaoController {
 
     //ALTERAR DESIGNAÇÃO
     @CrossOrigin(origins = "", allowedHeaders = "")
-    @PutMapping
+    @PutMapping("/{designacao_id}")
     public Designacao alterarDesignacao(@RequestBody DesignacaoRequestDTO data) {
         Designacao designacao = new Designacao(data);
         if (data.designacao_id() == null) {

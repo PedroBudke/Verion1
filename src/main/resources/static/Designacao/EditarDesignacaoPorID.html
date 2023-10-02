@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deletar Pessoas Por ID</title>
+    <title>Editar Designação</title>
     <style>
         :root {
             --cor-fundo: rgb(34, 41, 47);
@@ -112,15 +111,14 @@
 
         <li><a href="#">Designação</a>
             <ul>
-                <li><a href="http://localhost:8080/Designacao/CadastrarDesignacao.html">Cadastrar Designação</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
-                <li><a href="Bhttp://localhost:8080/Designacao/uscarDesignacaoPorID.html">Buscar Designação Por Id</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdAbrigo.html">Buscar Designação Por Id do Abrigo</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdPessoa.html">Buscar Designação Por Id da Pessoa</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorResponsavel.html">Buscar Designação Por Responsável</a></li>
-                <li><a href="http://localhost:8080/Designacao/DeletarDesignacaoPorID.html">Deletar Designação Por ID</a></li>
-                <li><a href="http://localhost:8080/Designacao/DeletarDesignacaoPorID.html">Deletar Designação Por ID</a></li>
-                <li><a href="http://localhost:8080/Designacao/EditarDesignacaoPorID.html">Editar Designação Por ID</a></li>
+                <li><a href="CadastrarDesignacao.html">Cadastrar Designação</a></li>
+                <li><a href="BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
+                <li><a href="BuscarDesignacaoPorID.html">Buscar Designação Por Id</a></li>
+                <li><a href="BuscarDesignacaoPorIdAbrigo.html">Buscar Designação Por Id do Abrigo</a></li>
+                <li><a href="BuscarDesignacaoPorIdPessoa.html">Buscar Designação Por Id da Pessoa</a></li>
+                <li><a href="BuscarDesignacaoPorResponsavel.html">Buscar Designação Por Responsável</a></li>
+                <li><a href="DeletarDesignacaoPorID.html">Deletar Designação Por ID</a></li>
+                <li><a href="EditarDesignacaoPorID.html">Editar Designação Por ID</a></li>
             </ul>
         </li>
 
@@ -131,7 +129,7 @@
                 <li><a href="http://localhost:8080/Pessoas/CadastrarPessoas.html">Cadastrar Pessoas</a></li>
                 <li><a href="http://localhost:8080/Pessoas/BuscarTodasPessoas.html">Buscar Pessoas</a></li>
                 <li><a href="http://localhost:8080/Pessoas/BuscarPessoasOrdemCrescente.html">Buscar Pessoa(A-Z)</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasOrdemDecrescente.html">Buscar Pessoa(Z-A)</a></li>
+                <li><a href="http://localhost:8080/PessoasBuscarPessoasOrdemDecrescente.html">Buscar Pessoa(Z-A)</a></li>
                 <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorBairro.html">Buscar Pessoa Por Bairro</a></li>
                 <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCidade.html">Buscar Pessoa Por Cidade</a></li>
                 <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCpf.html">Buscar Pessoa Por Cpf</a></li>
@@ -147,82 +145,149 @@
 
         <li><a href="#">Usuários</a>
             <ul>
-                <li><a href="CadastrarUsuarios.html">Cadastrar Usuários</a></li>
-                <li><a href="BuscarTodosUsuarios.html">Buscar Todos Usuários</a></li>
-                <li><a href="BuscarUsuariosPorID.html">Buscar Usuários Por ID</a></li>
-                <li><a href="BuscarUsuariosPorCPF.html">Buscar Usuários Por CPF</a></li>
-                <li><a href="DeletarUsuariosPorID.html">Deletar Usuários Por ID</a></li>
+                <li><a href="http://localhost:8080/Usuarios/CadastrarUsuarios.html">Cadastrar Usuários</a></li>
+                <li><a href="http://localhost:8080/Usuarios/BuscarTodosUsuarios.html">Buscar Todos Usuários</a></li>
+                <li><a href="http://localhost:8080/Usuarios/BuscarUsuariosPorID.html">Buscar Usuários Por ID</a></li>
+                <li><a href="http://localhost:8080/Usuarios/BuscarUsuariosPorCPF.html">Buscar Usuários Por CPF</a></li>
+                <li><a href="http://localhost:8080/Usuarios/DeletarUsuariosPorID.html">Deletar Usuários Por ID</a></li>
             </ul>
         </li>
+
     </ul>
 </nav>
-
-<table id="tabela-usuario">
+<table id="tabela-designacao">
     <thead>
     <tr>
-        <th>ID Usuario</th>
-        <th>CPF</th>
-        <th>Email</th>
+        <th>ID Designação</th>
+        <th>ID Abrigo</th>
+        <th>ID Pessoa</th>
+        <th>Data da Designação</th>
+        <th>Responsável</th>
     </tr>
     </thead>
     <tbody>
     <!-- Os dados serão carregados aqui dinamicamente -->
     </tbody>
 </table>
+
+<div id="form-editar" style="display: none;">
+    <h2>Editar Designação</h2>
+    <form onsubmit="salvarEdicao(event)">
+
+        <input type="hidden" id="edit-designacao-id" name="designacao_id">
+
+        <label for="edit-abrigo-id">Abrigo Id:</label>
+        <input type="text" id="edit-abrigo-id" name="abrigo_id">
+
+        <label for="edit-pessoa-id">Pessoa ID:</label>
+        <input type="text" id="edit-pessoa-id" name="pessoa_id">
+
+        <label for="edit-designacao-data">Atendimento Data:</label>
+        <input type="date" id="edit-designacao-data" name="designacao_data">
+
+        <label for="edit-designacao-responsavel">Responsável:</label>
+        <input type="text" id="edit-designacao-responsavel" name="designacao_responsavel">
+        <!-- Outros campos de edição aqui -->
+        <button type="submit">Salvar</button>
+        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    </form>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    // Função para excluir um atendimento
-    function excluirUsuarios(usuario_id) {
-        axios.delete(`/usuario/${usuario_id}`)
+    function preencherFormularioEdicao(designacao) {
+        document.getElementById('edit-designacao-id').value = designacao.designacao_id;
+        document.getElementById('edit-abrigo-id').value = designacao.abrigo_id;
+        document.getElementById('edit-pessoa-id').value = designacao.pessoa_id;
+        document.getElementById('edit-designacao-data').value = designacao.designacao_data;
+        document.getElementById('edit-designacao-responsavel').value = designacao.designacao_responsavel;
+    }
+
+    function cancelarEdicao() {
+        document.getElementById('form-editar').style.display = 'none';
+        document.getElementById('tabela-designacao').style.display= 'table';
+    }
+    function econderTabela() {
+        document.getElementById('tabela-designacao').style.display = 'none';
+    }
+
+    function mostrarTabela() {
+        document.getElementById('tabela-designacao').style.display = 'table';
+    }
+
+    function editarDesignacao(designacao_id) {
+        econderTabela();
+        axios.get(`/designacao/${designacao_id}`)
             .then(response => {
-                // Atualizar a tabela após a exclusão
-                BuscarTodosUsuarios();
+                const designacao = response.data;
+                preencherFormularioEdicao(designacao);
+                document.getElementById('form-editar').style.display = 'block';
             })
             .catch(error => {
-                console.error('Erro ao excluir o Usuario:', error);
+                console.error('Erro ao buscar a Designação:', error);
             });
     }
 
-    // Função para preencher a tabela com os dados dos atendimentos
-    function preencherTabela(usuarios) {
-        const tabela = document.getElementById('tabela-usuario').getElementsByTagName('tbody')[0];
-        tabela.innerHTML = ''; // Limpar a tabela antes de preencher com os novos dados
+    function salvarEdicao(event) {
+        event.preventDefault();
+        const designacao_id = document.getElementById('edit-designacao-id').value;
+        const abrigo_id = document.getElementById('edit-abrigo-id').value;
+        const pessoa_id = document.getElementById('edit-pessoa-id').value;
+        const designacao_data = document.getElementById('edit-designacao-data').value;
+        const designacao_responsavel = document.getElementById('edit-designacao-responsavel').value;
 
-        usuarios.forEach(usuarios => {
-            const row = tabela.insertRow();
-            row.insertCell().innerText = usuarios.usuario_id;
-            row.insertCell().innerText = usuarios.usuario_cpf;
-            row.insertCell().innerText = usuarios.usuario_email;
+        // Construa um objeto com os dados que você deseja enviar ao servidor
+        const dadosAtualizados = {
+            designacao_id: designacao_id,
+            abrigo_id: abrigo_id,
+            pessoa_id: pessoa_id,
+            designacao_data: designacao_data,
+            designacao_responsavel: designacao_responsavel,
+        };
 
-            // Adicionar um botão de exclusão
-            const cellAcoes = row.insertCell();
-            const btnExcluir = document.createElement('button');
-            btnExcluir.innerHTML = '<i class="fas fa-trash"></i> Excluir'; // Ícone de lixeira
-            btnExcluir.addEventListener('click', () => {
-                excluirUsuarios(usuarios.usuario_id);
-            });
-            cellAcoes.appendChild(btnExcluir);
-        });
-    }
-
-    // Função para buscar todos os atendimentos e preencher a tabela
-    function BuscarTodosUsuarios() {
-        axios.get(`/usuario/todos`)
+        axios.put(`/designacao/${designacao_id}`, dadosAtualizados)
             .then(response => {
-                const usuarios = response.data;
-                preencherTabela(usuarios);
+                BuscarTodasDesignacao();
+                cancelarEdicao();
             })
             .catch(error => {
-                console.error('Erro ao carregar os Usuarios:', error);
+                console.error('Erro ao atualizar a Designação:', error);
             });
     }
-    // Chamar a função de busca quando a página carregar
-    BuscarTodosUsuarios();
+
+    function BuscarTodasDesignacao() {
+        mostrarTabela();
+        axios.get(`/designacao/todos`)
+            .then(response => {
+                const designacao = response.data;
+                const tabela = document.getElementById('tabela-designacao').getElementsByTagName('tbody')[0];
+                tabela.innerHTML = '';
+                designacao.forEach(designacao => {
+                    const row = tabela.insertRow();
+                    row.insertCell().innerText = designacao.designacao_id;
+                    row.insertCell().innerText = designacao.abrigo_id;
+                    row.insertCell().innerText = designacao.pessoa_id;
+                    row.insertCell().innerText = designacao.designacao_data;
+                    row.insertCell().innerText = designacao.designacao_responsavel;
+
+                    // Adicione um botão de edição
+                    const cellEditar = row.insertCell();
+                    const btnEditar = document.createElement('button');
+                    btnEditar.innerText = 'Editar';
+                    btnEditar.addEventListener('click', () => {
+                        editarDesignacao(designacao.designacao_id);
+                    });
+                    cellEditar.appendChild(btnEditar);
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao carregar as Designações:', error);
+            });
+    }
+
+    // Chame a função de busca quando a página carregar
+    BuscarTodasDesignacao();
 </script>
 </body>
 </html>
-
-
-
-
-
