@@ -49,7 +49,7 @@ public class PessoaController {
 
     //ALTERAR PESSOA
     @CrossOrigin(origins = "", allowedHeaders = "")
-    @PutMapping
+    @PutMapping("/{pessoa_id}")
     public Pessoas alterarPessoa(@RequestBody PessoaRequestDTO data) {
         Pessoas pessoas = new Pessoas(data);
         if (data.pessoa_id() == null) {

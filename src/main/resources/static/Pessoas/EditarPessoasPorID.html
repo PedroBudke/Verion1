@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Pessoas Por Estado</title>
+    <title>Editar Pessoas</title>
     <style>
         :root {
             --cor-fundo: rgb(34, 41, 47);
@@ -76,7 +75,7 @@
         <li><a href="#">Abrigo</a>
             <ul>
                 <li><a href="http://localhost:8080/Abrigos/CadastrarAbrigos.html">Cadastro De Abrigos</a></li>
-                <li><a href="http://localhost:8080/Abrigos/BuscarTodosAbrigos.html">Buscar Todos Abrigos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarTodosAbrigos.html">Buscar Abrigos</a></li>
                 <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosAtivos.html">Buscar Abrigos Ativos</a></li>
                 <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosInativos.html">Buscar Abrigos Inativos</a></li>
                 <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosNomeOrdemCrescente.html">Buscar Abrigos (A-Z)</a></li>
@@ -123,6 +122,8 @@
             </ul>
         </li>
 
+        <!--Pessoas-->
+
         <li><a href="#">Pessoas</a>
             <ul>
                 <li><a href="CadastrarPessoas.html">Cadastrar Pessoas</a></li>
@@ -152,15 +153,9 @@
                 <li><a href="http://localhost:8080/Usuarios/DeletarUsuariosPorID.html">Deletar Usuários Por ID</a></li>
             </ul>
         </li>
+
     </ul>
 </nav>
-
-<form onsubmit="event.preventDefault(); BuscarPessoasPorEstado();" id="buscar-form">
-    <label for="pessoa_estado">Digite o cpf da Pessoa:</label>
-    <input type="text" id="pessoa_estado" name="pessoa_estado" placeholder="Digite aqui...">
-    <input type="submit" value="Buscar">
-</form>
-
 <table id="tabela-pessoas">
     <thead>
     <tr>
@@ -185,17 +180,160 @@
     </tbody>
 </table>
 
+<div id="form-editar" style="display: none;">
+    <h2>Editar Pessoas</h2>
+    <form onsubmit="salvarEdicao(event)">
+        <input type="hidden" id="edit-pessoa-id" name="pessoa_id">
+
+        <label for="edit-pessoa-cpf">CPF:</label>
+        <input type="text" id="edit-pessoa-cpf" name="pessoa_cpf">
+
+        <label for="edit-pessoa-nome">Nome:</label>
+        <input type="text" id="edit-pessoa-nome" name="pessoa_nome">
+
+        <label for="edit-pessoa-contato">Contato:</label>
+        <input type="text" id="edit-pessoa-contato" name="pessoa_contato">
+
+        <label for="edit-pessoa-email">Email:</label>
+        <input type="text" id="edit-pessoa-email" name="pessoa_email">
+
+        <label for="edit-pessoa-genero">Gênero:</label>
+        <input type="text" id="edit-pessoa-genero" name="pessoa_genero">
+
+        <label for="edit-data-nascimento">Data Nascimento:</label>
+        <input type="text" id="edit-data-nascimento" name="data_nascimento">
+
+        <label for="edit-pessoa-cep">CEP:</label>
+        <input type="text" id="edit-pessoa-cep" name="pessoa_cep">
+
+        <label for="edit-pessoa-rua">Rua:</label>
+        <input type="text" id="edit-pessoa-rua" name="pessoa_rua">
+
+        <label for="edit-pessoa-bairro">Bairro:</label>
+        <input type="text" id="edit-pessoa-bairro" name="pessoa_bairro">
+
+        <label for="edit-pessoa-cidade">Cidade:</label>
+        <input type="text" id="edit-pessoa-cidade" name="pessoa_cidade">
+
+        <label for="edit-pessoa-estado">Estado:</label>
+        <input type="text" id="edit-pessoa-estado" name="pessoa_estado">
+
+        <label for="edit-pessoa-nr-residencia">Nr Residência:</label>
+        <input type="text" id="edit-pessoa-nr-residencia" name="pessoa_nr_residencia">
+
+        <label for="edit-pessoa-usuario">Usuário:</label>
+        <input type="text" id="edit-pessoa-usuario" name="pessoa_usuario">
+
+        <label for="edit-pessoa-senha">Senha:</label>
+        <input type="text" id="edit-pessoa-senha" name="pessoa_senha">
+
+        <!-- Outros campos de edição aqui -->
+        <button type="submit">Salvar</button>
+        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    </form>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    function BuscarPessoasPorEstado() {
-        const pessoa_estado = document.getElementById('pessoa_estado').value;
-        const tabela = document.getElementById('tabela-pessoas').getElementsByTagName('tbody')[0];
-        tabela.innerHTML = ''; // Limpar a tabela antes de preencher com os novos dados
+    function preencherFormularioEdicao(pessoas) {
+        document.getElementById('edit-pessoa-id').value = pessoas.pessoa_id;
+        document.getElementById('edit-pessoa-cpf').value = pessoas.pessoa_cpf;
+        document.getElementById('edit-pessoa-nome').value = pessoas.pessoa_nome;
+        document.getElementById('edit-pessoa-contato').value = pessoas.pessoa_contato;
+        document.getElementById('edit-pessoa-email').value = pessoas.pessoa_email;
+        document.getElementById('edit-pessoa-genero').value = pessoas.pessoa_genero;
+        document.getElementById('edit-data-nascimento').value = pessoas.data_nascimento;
+        document.getElementById('edit-pessoa-cep').value = pessoas.pessoa_cep;
+        document.getElementById('edit-pessoa-rua').value = pessoas.pessoa_rua;
+        document.getElementById('edit-pessoa-bairro').value = pessoas.pessoa_bairro;
+        document.getElementById('edit-pessoa-cidade').value = pessoas.pessoa_cidade;
+        document.getElementById('edit-pessoa-estado').value = pessoas.pessoa_estado;
+        document.getElementById('edit-pessoa-nr-residencia').value = pessoas.pessoa_nr_residencia;
+        document.getElementById('edit-pessoa-usuario').value = pessoas.pessoa_usuario;
+        document.getElementById('edit-pessoa-senha').value = pessoas.pessoa_senha;
 
-        axios.get(`http://localhost:8080/pessoas/buscarPorEstado?pessoa_estado=${pessoa_estado}`)
+    }
+
+    function cancelarEdicao() {
+        document.getElementById('form-editar').style.display = 'none';
+        document.getElementById('tabela-pessoas').style.display= 'table';
+    }
+    function econderTabela() {
+        document.getElementById('tabela-pessoas').style.display = 'none';
+    }
+
+    function mostrarTabela() {
+        document.getElementById('tabela-pessoas').style.display = 'table';
+    }
+
+    function editarPessoa(pessoa_id) {
+        econderTabela();
+        axios.get(`/pessoas/${pessoa_id}`)
+            .then(response => {
+                const pessoa = response.data;
+                preencherFormularioEdicao(pessoa);
+                document.getElementById('form-editar').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Erro ao buscar a Pessoa:', error);
+            });
+    }
+
+    function salvarEdicao(event) {
+        event.preventDefault();
+        const pessoa_id = document.getElementById('edit-pessoa-id').value;
+        const pessoa_cpf = document.getElementById('edit-pessoa-cpf').value;
+        const pessoa_nome = document.getElementById('edit-pessoa-nome').value;
+        const pessoa_contato = document.getElementById('edit-pessoa-contato').value;
+        const pessoa_email = document.getElementById('edit-pessoa-email').value;
+        const pessoa_genero = document.getElementById('edit-pessoa-genero').value;
+        const data_nascimento = document.getElementById('edit-data-nascimento').value;
+        const pessoa_cep = document.getElementById('edit-pessoa-cep').value;
+        const pessoa_rua = document.getElementById('edit-pessoa-rua').value;
+        const pessoa_bairro = document.getElementById('edit-pessoa-bairro').value;
+        const pessoa_cidade = document.getElementById('edit-pessoa-cidade').value;
+        const pessoa_estado = document.getElementById('edit-pessoa-estado').value;
+        const pessoa_nr_residencia = document.getElementById('edit-pessoa-nr-residencia').value;
+        const pessoa_usuario = document.getElementById('edit-pessoa-usuario').value;
+        const pessoa_senha = document.getElementById('edit-pessoa-senha').value;
+
+        // Construa um objeto com os dados que você deseja enviar ao servidor
+        const dadosAtualizados = {
+            pessoa_id: pessoa_id,
+            pessoa_cpf: pessoa_cpf,
+            pessoa_nome: pessoa_nome,
+            pessoa_contato: pessoa_contato,
+            pessoa_email: pessoa_email,
+            pessoa_genero: pessoa_genero,
+            data_nascimento: data_nascimento,
+            pessoa_cep: pessoa_cep,
+            pessoa_rua: pessoa_rua,
+            pessoa_bairro: pessoa_bairro,
+            pessoa_cidade: pessoa_cidade,
+            pessoa_estado: pessoa_estado,
+            pessoa_nr_residencia: pessoa_nr_residencia,
+            pessoa_usuario: pessoa_usuario,
+            pessoa_senha: pessoa_senha,
+        };
+
+        axios.put(`/pessoas/${pessoa_id}`, dadosAtualizados)
+            .then(response => {
+                BuscarTodasPessoas();
+                cancelarEdicao();
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar a Pessoa:', error);
+            });
+    }
+
+    function BuscarTodasPessoas() {
+        mostrarTabela();
+        axios.get(`/pessoas/BuscarTodasPessoas`)
             .then(response => {
                 const pessoas = response.data;
-
+                const tabela = document.getElementById('tabela-pessoas').getElementsByTagName('tbody')[0];
+                tabela.innerHTML = '';
                 pessoas.forEach(pessoas => {
                     const row = tabela.insertRow();
                     row.insertCell().innerText = pessoas.pessoa_id;
@@ -212,14 +350,26 @@
                     row.insertCell().innerText = pessoas.pessoa_estado;
                     row.insertCell().innerText = pessoas.pessoa_nr_residencia;
                     row.insertCell().innerText = pessoas.pessoa_usuario;
+                    row.insertCell().innerText = pessoas.pessoa_senha;
+
+                    // Adicione um botão de edição
+                    const cellEditar = row.insertCell();
+                    const btnEditar = document.createElement('button');
+                    btnEditar.innerText = 'Editar';
+                    btnEditar.addEventListener('click', () => {
+                        editarPessoa(pessoas.pessoa_id);
+                    });
+                    cellEditar.appendChild(btnEditar);
                 });
             })
             .catch(error => {
-                console.error('Erro ao carregar as Pessoas Pelo Bairro :', error);
+                console.error('Erro ao carregar as Pessoas:', error);
             });
     }
+
+    // Chame a função de busca quando a página carregar
+    BuscarTodasPessoas();
 </script>
+
 </body>
-
 </html>
-
