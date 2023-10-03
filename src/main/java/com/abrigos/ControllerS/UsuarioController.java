@@ -48,7 +48,7 @@ public class UsuarioController {
 
     //ALTERAR USUARIO
     @CrossOrigin(origins = "", allowedHeaders = "")
-    @PutMapping
+    @PutMapping("/{usuario_id}")
     public Usuarios alterarUsuario(@RequestBody UsuarioRequestDTO data) {
         Usuarios usuario = new Usuarios(data);
         if (data.usuario_id() == null) {

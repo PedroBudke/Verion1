@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Atendimento Por Responsavel</title>
+    <title>Editar Usuário</title>
     <style>
         :root {
             --cor-fundo: rgb(34, 41, 47);
@@ -76,7 +75,7 @@
         <li><a href="#">Abrigo</a>
             <ul>
                 <li><a href="http://localhost:8080/Abrigos/CadastrarAbrigos.html">Cadastro De Abrigos</a></li>
-                <li><a href="http://localhost:8080/Abrigos/BuscarTodosAbrigos.html">Buscar Todos Abrigos</a></li>
+                <li><a href="http://localhost:8080/Abrigos/BuscarTodosAbrigos.html">Buscar Abrigos</a></li>
                 <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosAtivos.html">Buscar Abrigos Ativos</a></li>
                 <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosInativos.html">Buscar Abrigos Inativos</a></li>
                 <li><a href="http://localhost:8080/Abrigos/BuscarAbrigosNomeOrdemCrescente.html">Buscar Abrigos (A-Z)</a></li>
@@ -97,13 +96,14 @@
 
         <li><a href="#">Atendimento</a>
             <ul>
-                <li><a href="CadastrarAtendimentos.html">Cadastrar Atendimentos</a></li>
-                <li><a href="BuscarTodosAtendimentos.html">Buscar Todos Atendimentos</a></li>
-                <li><a href="BuscarAtendimentosPorID.html">Buscar Atendimentos Por ID</a></li>
-                <li><a href="BuscarAtendimentosPorIdAbrigo.html">Buscar Atendimentos Por ID do Abrigo</a></li>
-                <li><a href="BuscarAtendimentosPorIdPessoa.html">Buscar Atendimentos Por ID da Pessoa</a></li>
-                <li><a href="BuscarAtendimentosPorResponsavel.html">Buscar Atendimentos Por Responsável</a></li>
-                <li><a href="DeletarAtendimentoPorID.html">Deletar Atendimento Por ID</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/CadastrarAtendimentos.html">Cadastrar Atendimentos</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarTodosAtendimentos.html">Buscar Todos Atendimentos</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorID.html">Buscar Atendimentos Por ID</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorIdAbrigo.html">Buscar Atendimentos Por ID do Abrigo</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorIdPessoa.html">Buscar Atendimentos Por ID da Pessoa</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/BuscarAtendimentosPorResponsavel.html">Buscar Atendimentos Por Responsável</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/DeletarAtendimentoPorID.html">Deletar Atendimento Por ID</a></li>
+                <li><a href="http://localhost:8080/Atendimentos/EditarAtendimentosPorID.html">Editar Atendimento Por ID</a></li>
             </ul>
         </li>
 
@@ -113,14 +113,17 @@
             <ul>
                 <li><a href="http://localhost:8080/Designacao/CadastrarDesignacao.html">Cadastrar Designação</a></li>
                 <li><a href="http://localhost:8080/Designacao/BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorID.html">Buscar Designação Por Id</a></li>
+                <li><a href="Bhttp://localhost:8080/Designacao/uscarDesignacaoPorID.html">Buscar Designação Por Id</a></li>
                 <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdAbrigo.html">Buscar Designação Por Id do Abrigo</a></li>
                 <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdPessoa.html">Buscar Designação Por Id da Pessoa</a></li>
                 <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorResponsavel.html">Buscar Designação Por Responsável</a></li>
                 <li><a href="http://localhost:8080/Designacao/DeletarDesignacaoPorID.html">Deletar Designação Por ID</a></li>
+                <li><a href="http://localhost:8080/Designacao/DeletarDesignacaoPorID.html">Deletar Designação Por ID</a></li>
                 <li><a href="http://localhost:8080/Designacao/EditarDesignacaoPorID.html">Editar Designação Por ID</a></li>
             </ul>
         </li>
+
+        <!--Pessoas-->
 
         <li><a href="#">Pessoas</a>
             <ul>
@@ -144,33 +147,24 @@
 
         <li><a href="#">Usuários</a>
             <ul>
-                <li><a href="http://localhost:8080/Usuarios/CadastrarUsuarios.html">Cadastrar Usuários</a></li>
-                <li><a href="http://localhost:8080/Usuarios/BuscarTodosUsuarios.html">Buscar Todos Usuários</a></li>
-                <li><a href="http://localhost:8080/Usuarios/BuscarUsuariosPorID.html">Buscar Usuários Por ID</a></li>
-                <li><a href="http://localhost:8080/Usuarios/BuscarUsuariosPorCPF.html">Buscar Usuários Por CPF</a></li>
-                <li><a href="http://localhost:8080/Usuarios/DeletarUsuariosPorID.html">Deletar Usuários Por ID</a></li>
-                <li><a href="http://localhost:8080/Usuarios/EditarUsuariosPorID.html">Editar Usuários Por ID</a></li>
+                <li><a href="CadastrarUsuarios.html">Cadastrar Usuários</a></li>
+                <li><a href="BuscarTodosUsuarios.html">Buscar Todos Usuários</a></li>
+                <li><a href="BuscarUsuariosPorID.html">Buscar Usuários Por ID</a></li>
+                <li><a href="BuscarUsuariosPorCPF.html">Buscar Usuários Por CPF</a></li>
+                <li><a href="DeletarUsuariosPorID.html">Deletar Usuários Por ID</a></li>
+                <li><a href="EditarUsuariosPorID.html">Editar Usuários Por ID</a></li>
             </ul>
         </li>
+
     </ul>
 </nav>
-
-<form onsubmit="event.preventDefault(); BuscarAtendimentoPorResponsavel();" id="buscar-form">
-    <label for="atendimento_responsavel">Digite o nome do responsável:</label>
-    <input type="text" id="atendimento_responsavel" name="atendimento_responsavel" placeholder="Digite aqui...">
-    <input type="submit" value="Buscar">
-</form>
-
-<table id="tabela-atendimentos">
+<table id="tabela-usuario">
     <thead>
     <tr>
-        <th>ID Atendimento</th>
-        <th>ID Abrigo</th>
-        <th>ID Pessoa</th>
-        <th>Data do Atendimento</th>
-        <th>Observação</th>
-        <th>Tomada de Decisão</th>
-        <th>Responsável</th>
+        <th>ID Usuario</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Senha</th>
     </tr>
     </thead>
     <tbody>
@@ -178,34 +172,118 @@
     </tbody>
 </table>
 
+<div id="form-editar" style="display: none;">
+    <h2>Editar Usuario</h2>
+    <form onsubmit="salvarEdicao(event)">
+
+        <input type="hidden" id="edit-usuario-id" name="usuario_id">
+
+        <label for="edit-usuario-cpf">CPF:</label>
+        <input type="text" id="edit-usuario-cpf" name="usuario_cpf">
+
+        <label for="edit-usuario-email">Email:</label>
+        <input type="text" id="edit-usuario-email" name="usuario_email">
+
+        <label for="edit-usuario-senha">Senha:</label>
+        <input type="text" id="edit-usuario-senha" name="usuario_senha">
+
+        <!-- Outros campos de edição aqui -->
+        <button type="submit">Salvar</button>
+        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    </form>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    function BuscarAtendimentoPorResponsavel() {
-        const atendimento_responsavel = document.getElementById('atendimento_responsavel').value;
-        const tabela = document.getElementById('tabela-atendimentos').getElementsByTagName('tbody')[0];
-        tabela.innerHTML = ''; // Limpar a tabela antes de preencher com os novos dados
+    function preencherFormularioEdicao(usuario) {
+        document.getElementById('edit-usuario-id').value = usuario.usuario_id;
+        document.getElementById('edit-usuario-cpf').value = usuario.usuario_cpf;
+        document.getElementById('edit-usuario-email').value = usuario.usuario_email;
+        document.getElementById('edit-usuario-senha').value = usuario.usuario_senha;
+    }
 
-        axios.get(`http://localhost:8080/atendimentos/buscarPorResponsavel?atendimento_responsavel=${atendimento_responsavel}`)
+    function cancelarEdicao() {
+        document.getElementById('form-editar').style.display = 'none';
+        document.getElementById('tabela-usuario').style.display= 'table';
+    }
+    function econderTabela() {
+        document.getElementById('tabela-usuario').style.display = 'none';
+    }
+
+    function mostrarTabela() {
+        document.getElementById('tabela-usuario').style.display = 'table';
+    }
+
+    function editarUsuarios(usuario_id) {
+        econderTabela();
+        axios.get(`/usuario/${usuario_id}`)
             .then(response => {
-                const atendimentos = response.data;
+                const usuarios = response.data;
+                preencherFormularioEdicao(usuarios);
+                document.getElementById('form-editar').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o Usuário:', error);
+            });
+    }
 
-                atendimentos.forEach(atendimentos => {
+    function salvarEdicao(event) {
+        event.preventDefault();
+        const usuario_id = document.getElementById('edit-usuario-id').value;
+        const usuario_cpf = document.getElementById('edit-usuario-cpf').value;
+        const usuario_email = document.getElementById('edit-usuario-email').value;
+        const usuario_senha = document.getElementById('edit-usuario-senha').value;
+
+        // Construa um objeto com os dados que você deseja enviar ao servidor
+        const dadosAtualizados = {
+            usuario_id: usuario_id,
+            usuario_cpf: usuario_cpf,
+            usuario_email: usuario_email,
+            usuario_senha: usuario_senha,
+        };
+
+        axios.put(`/usuario/${usuario_id}`, dadosAtualizados)
+            .then(response => {
+                BuscarTodosUsuarios();
+                cancelarEdicao();
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar o Usuário:', error);
+            });
+    }
+
+    function BuscarTodosUsuarios() {
+        mostrarTabela();
+        axios.get(`/usuario/todos`)
+            .then(response => {
+                const usuarios = response.data;
+                const tabela = document.getElementById('tabela-usuario').getElementsByTagName('tbody')[0];
+                tabela.innerHTML = '';
+                usuarios.forEach(usuarios => {
                     const row = tabela.insertRow();
-                    row.insertCell().innerText = atendimentos.atendimento_id;
-                    row.insertCell().innerText = atendimentos.abrigo_id;
-                    row.insertCell().innerText = atendimentos.pessoa_id;
-                    row.insertCell().innerText = atendimentos.atendimento_data;
-                    row.insertCell().innerText = atendimentos.observacao;
-                    row.insertCell().innerText = atendimentos.tomada_decisao;
-                    row.insertCell().innerText = atendimentos.atendimento_responsavel;
+                    row.insertCell().innerText = usuarios.usuario_id;
+                    row.insertCell().innerText = usuarios.usuario_cpf;
+                    row.insertCell().innerText = usuarios.usuario_email;
+                    row.insertCell().innerText = usuarios.usuario_senha;
+
+                    // Adicione um botão de edição
+                    const cellEditar = row.insertCell();
+                    const btnEditar = document.createElement('button');
+                    btnEditar.innerText = 'Editar';
+                    btnEditar.addEventListener('click', () => {
+                        editarUsuarios(usuarios.usuario_id);
+                    });
+                    cellEditar.appendChild(btnEditar);
                 });
             })
             .catch(error => {
-                console.error('Erro ao carregar o atendimento Por ID:', error);
+                console.error('Erro ao carregar os Usuários:', error);
             });
     }
+
+    // Chame a função de busca quando a página carregar
+    BuscarTodosUsuarios();
 </script>
 </body>
-
 </html>
-
