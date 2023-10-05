@@ -5,32 +5,34 @@
     <title>Módulo de Abrigos</title>
     <style>
         :root {
-            --cor-fundo : rgb(34,41,47);
-            --cor-hover : rgb(118,180,145);
-            --cor-primaria : rgb(232,253,241);
+            --cor-fundo: #ffffff; /* Cor de fundo principal */
+            --cor-hover: rgb(3, 4, 94);
+            --cor-primaria: rgb(0, 119, 182);
+            --cor-linha: #90E0EF;
         }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--cor-fundo);
         }
 
-        .dp-menu ul{
+        .dp-menu ul {
             list-style-type: none;
             padding: 0;
         }
 
-        .dp-menu ul{
+        .dp-menu ul {
             background-color: var(--cor-fundo);
         }
 
-        .dp-menu ul li{
+        .dp-menu ul li {
             display: inline;
             position: relative;
         }
 
-        .dp-menu ul a{
+        .dp-menu ul a {
             color: var(--cor-primaria);
             text-decoration: none;
             display: inline-block;
@@ -38,29 +40,29 @@
             transition: background .6s;
         }
 
-        .dp-menu ul a:hover{
-            background-color: var(--cor-hover );
+        .dp-menu ul a:hover {
+            background-color: var(--cor-hover);
         }
 
         /*sub-menu*/
-        .dp-menu ul ul{
+        .dp-menu ul ul {
             display: none;
             left: 0;
             position: absolute;
         }
 
-        .dp-menu ul li:hover ul{
+        .dp-menu ul li:hover ul {
             display: block;
         }
 
-        .dp-menu ul ul{
+        .dp-menu ul ul {
             width: 150px;
         }
 
-        .dp-menu ul ul li a{
+        .dp-menu ul ul li a {
             display: block;
         }
-</style>
+    </style>
 </head>
 <body>
     <nav class="dp-menu">
