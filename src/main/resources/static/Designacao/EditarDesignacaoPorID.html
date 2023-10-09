@@ -7,23 +7,22 @@
     <title>Editar Designação</title>
     <style>
         :root {
-            --cor-fundo: rgb(34, 41, 47);
-            --cor-hover: rgb(118, 180, 145);
-            --cor-primaria: rgb(232, 253, 241);
+            --cor-fundo: #ffffff; /* Cor de fundo principal */
+            --cor-hover: rgb(3, 4, 94);
+            --cor-primaria: rgb(0, 119, 182);
+            --cor-linha: #90E0EF;
         }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--cor-fundo);
         }
 
         .dp-menu ul {
             list-style-type: none;
-            padding: 0%;
-        }
-
-        .dp-menu ul {
+            padding: 0;
             background-color: var(--cor-fundo);
         }
 
@@ -61,6 +60,91 @@
 
         .dp-menu ul ul li a {
             display: block;
+        }
+
+        /* Estilização da tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: var(--cor-fundo); /* Cor de fundo para os cabeçalhos */
+            color: var(--cor-primaria); /* Cor do texto para os cabeçalhos */
+        }
+
+        /* Estilos alternados para as linhas da tabela */
+        tbody tr:nth-child(even) {
+            background-color: var(--cor-linha);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: var(--cor-linha);
+        }
+
+        button {
+            background-color: var(--cor-hover); /* Cor de fundo no hover */
+            color: #fff; /* Cor do texto branca */
+            padding: 5px 10px; /* Espaçamento interno do botão */
+            cursor: pointer; /* Alterar o cursor para indicar que é clicável */
+            border: none; /* Sem borda */
+            border-radius: 5px; /* Adicione um pequeno raio de borda para arredondar os cantos */
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--cor-primaria); /* Cor de fundo no hover */
+        }
+
+        /* Estilização do formulário */
+        #form-editar {
+            max-width: 500px; /* Defina a largura máxima desejada */
+            margin: 20px auto; /* Centraliza o formulário horizontalmente e adiciona margens */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        #form-editar h2 {
+            margin-bottom: 20px;
+            color: var(--cor-primaria);
+        }
+
+        #form-editar label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
+        #form-editar input[type="text"] {
+            width: 480px;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #form-editar button[type="submit"],
+        #form-editar button[type="button"] {
+            background-color: var(--cor-hover); /* Cor de fundo no hover */
+            color: #fff; /* Cor do texto branca */
+            padding: 5px 10px; /* Espaçamento interno do botão */
+            cursor: pointer; /* Alterar o cursor para indicar que é clicável */
+            border: none; /* Sem borda */
+            border-radius: 5px; /* Adicione um pequeno raio de borda para arredondar os cantos */
+            transition: background-color 0.3s;
+        }
+
+        #form-editar button[type="submit"]:hover,
+        #form-editar button[type="button"]:hover {
+            background-color: var(--cor-primaria);
         }
     </style>
 </head>
@@ -165,6 +249,7 @@
         <th>ID Pessoa</th>
         <th>Data da Designação</th>
         <th>Responsável</th>
+        <th>Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -185,7 +270,7 @@
         <input type="text" id="edit-pessoa-id" name="pessoa_id">
 
         <label for="edit-designacao-data">Atendimento Data:</label>
-        <input type="date" id="edit-designacao-data" name="designacao_data">
+        <input type="text" id="edit-designacao-data" name="designacao_data">
 
         <label for="edit-designacao-responsavel">Responsável:</label>
         <input type="text" id="edit-designacao-responsavel" name="designacao_responsavel">
