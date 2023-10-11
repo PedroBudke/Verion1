@@ -117,6 +117,27 @@
         background-color: var(--cor-hover);
     }
 </style>
+
+<script>
+    // JavaScript para buscar informações de endereço com base no CEP
+    async function fetchAddressFromCEP() {
+        const cep = document.getElementById('cep').value;
+        if (!cep) return;
+
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+
+        if (data.erro) {
+            alert('CEP não encontrado.');
+        } else {
+            document.getElementById('rua').value = data.logradouro;
+            document.getElementById('bairro').value = data.bairro;
+            document.getElementById('cidade').value = data.localidade;
+            document.getElementById('estado').value = data.uf;
+        }
+    }
+</script>
+
 <body>
 <nav class="dp-menu">
     <ul>
@@ -124,16 +145,16 @@
 
         <!--Abrigo-->
 
-        <li><a href="#">Abrigo</a>
+        <li><a href="#">Abrigos</a>
             <ul>
                 <li><a href="CadastrarAbrigos.html">Cadastro De Abrigos</a></li>
-                <li><a href="BuscarTodosAbrigos.html">Buscar Abrigos</a></li>
+                <li><a href="BuscarTodosAbrigos.html">Buscar Todos Abrigos</a></li>
                 <li><a href="BuscarAbrigosAtivos.html">Buscar Abrigos Ativos</a></li>
                 <li><a href="BuscarAbrigosInativos.html">Buscar Abrigos Inativos</a></li>
                 <li><a href="BuscarAbrigosNomeOrdemCrescente.html">Buscar Abrigos (A-Z)</a></li>
-                <li><a href="BuscarAbrigosNomeOrdemDecrescente.html">Buscar Abrigos (Z-A)</a></li>
-                <li><a href="BuscarAbrigosCapacidadeOrdemCrescente.html">Buscar Abrigos Capacidade (+ -)</a></li>
-                <li><a href="BuscarAbrigosCapacidadeOrdemDecrescente.html">Buscar Abrigos Capacidade(- +)</a></li>
+                <li><a href="BuscarAbrigosNomeOrdemDecrescente.html">Buscar Abrigos (Z-A)</a><li>
+                <li><a href="BuscarAbrigosCapacidadeOrdemCrescente.html">Buscar Abrigos Capacidade (- +)</a></li>
+                <li><a href="BuscarAbrigosCapacidadeOrdemDecrescente.html">Buscar Abrigos Capacidade(+ -)</a></li>
                 <li><a href="BuscarAbrigosPorEstado.html">Buscar Abrigos Por Estado</a></li>
                 <li><a href="BuscarAbrigosPorCidade.html">Buscar Abrigos Por Cidade</a></li>
                 <li><a href="BuscarAbrigosPorID.html">Buscar Abrigos Por ID</a></li>
@@ -146,7 +167,7 @@
 
         <!--Atendimento-->
 
-        <li><a href="#">Atendimento</a>
+        <li><a href="#">Atendimentos</a>
             <ul>
                 <li><a href="http://localhost:8080/Atendimentos/CadastrarAtendimentos.html">Cadastrar Atendimentos</a></li>
                 <li><a href="http://localhost:8080/Atendimentos/BuscarTodosAtendimentos.html">Buscar Todos Atendimentos</a></li>
@@ -161,16 +182,16 @@
 
         <!--Designação-->
 
-        <li><a href="#">Designação</a>
+        <li><a href="#">Designações</a>
             <ul>
-                <li><a href="http://localhost:8080/Designacao/CadastrarDesignacao.html">Cadastrar Designação</a></li>
+                <li><a href="http://localhost:8080/Designacao/CadastrarDesignacao.html">Cadastrar Designações</a></li>
                 <li><a href="http://localhost:8080/Designacao/BuscarTodasDesignacao.html">Buscar Todas Designações</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorID.html">Buscar Designação Por Id</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdAbrigo.html">Buscar Designação Por Id do Abrigo</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdPessoa.html">Buscar Designação Por Id da Pessoa</a></li>
-                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorResponsavel.html">Buscar Designação Por Responsável</a></li>
-                <li><a href="http://localhost:8080/Designacao/DeletarDesignacaoPorID.html">Deletar Designação Por ID</a></li>
-                <li><a href="http://localhost:8080/Designacao/EditarDesignacaoPorID.html">Editar Designação Por ID</a></li>
+                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorID.html">Buscar Designações Por Id</a></li>
+                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdAbrigo.html">Buscar Designações Por Id do Abrigo</a></li>
+                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorIdPessoa.html">Buscar Designações Por Id da Pessoa</a></li>
+                <li><a href="http://localhost:8080/Designacao/BuscarDesignacaoPorResponsavel.html">Buscar Designações Por Responsável</a></li>
+                <li><a href="http://localhost:8080/Designacao/DeletarDesignacaoPorID.html">Deletar Designações Por ID</a></li>
+                <li><a href="http://localhost:8080/Designacao/EditarDesignacaoPorID.html">Editar Designações Por ID</a></li>
             </ul>
         </li>
 
@@ -179,18 +200,18 @@
         <li><a href="#">Pessoas</a>
             <ul>
                 <li><a href="http://localhost:8080/Pessoas/CadastrarPessoas.html">Cadastrar Pessoas</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarTodasPessoas.html">Buscar Pessoas</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasOrdemCrescente.html">Buscar Pessoa(A-Z)</a></li>
-                <li><a href="http://localhost:8080/PessoasBuscarPessoasOrdemDecrescente.html">Buscar Pessoa(Z-A)</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorBairro.html">Buscar Pessoa Por Bairro</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCidade.html">Buscar Pessoa Por Cidade</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCpf.html">Buscar Pessoa Por Cpf</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorEstado.html">Buscar Pessoa Por Estado</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorGenero.html">Buscar Pessoa Por Genero</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorId.html">Buscar Pessoa Por Id</a></li>
-                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorNome.html">Buscar Pessoa Por Nome</a></li>
-                <li><a href="http://localhost:8080/Pessoas/DeletarPessoaPorID.html">Deletar Pessoa Por ID</a></li>
-                <li><a href="http://localhost:8080/Pessoas/EditarPessoasPorID.html">Editar Pessoa Por ID</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarTodasPessoas.html">Buscar Todas Pessoas</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasOrdemCrescente.html">Buscar Pessoas(A-Z)</a></li>
+                <li><a href="http://localhost:8080/PessoasBuscarPessoasOrdemDecrescente.html">Buscar Pessoas(Z-A)</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorBairro.html">Buscar Pessoas Por Bairro</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCidade.html">Buscar Pessoas Por Cidade</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorCpf.html">Buscar Pessoas Por Cpf</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorEstado.html">Buscar Pessoas Por Estado</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorGenero.html">Buscar Pessoas Por Genero</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorId.html">Buscar Pessoas Por Id</a></li>
+                <li><a href="http://localhost:8080/Pessoas/BuscarPessoasPorNome.html">Buscar Pessoas Por Nome</a></li>
+                <li><a href="http://localhost:8080/Pessoas/DeletarPessoaPorID.html">Deletar Pessoas Por ID</a></li>
+                <li><a href="http://localhost:8080/Pessoas/EditarPessoasPorID.html">Editar Pessoas Por ID</a></li>
             </ul>
         </li>
 
@@ -215,57 +236,57 @@
 
             <div class="field">
                 <span class="heading">Nome</span><br>
-                <input type="text" class="input" id="nome">
+                <input type="text" class="input" id="nome" required>
             </div>
 
             <div class="field">
                 <span class="heading">Contato</span><br>
-                <input type="text" class="input" id="contato">
+                <input type="text" class="input" id="contato" required>
             </div>
 
             <div class="field">
                 <span class="heading">Cep</span><br>
-                <input type="text" class="input" id="cep">
+                <input type="text" class="input" id="cep" required onblur="fetchAddressFromCEP()">
             </div>
 
             <div class="field">
                 <span class="heading">Rua</span><br>
-                <input type="text" class="input" id="rua">
+                <input type="text" class="input" id="rua" required>
             </div>
 
             <div class="field">
                 <span class="heading">Bairro</span><br>
-                <input type="text" class="input" id="bairro">
+                <input type="text" class="input" id="bairro" required>
             </div>
 
             <div class="field">
                 <span class="heading">Cidade</span><br>
-                <input type="text" class="input" id="cidade">
+                <input type="text" class="input" id="cidade" required>
             </div>
 
             <div class="field">
                 <span class="heading">Estado</span><br>
-                <input type="text" class="input" id="estado">
+                <input type="text" class="input" id="estado" required>
             </div>
 
             <div class="field">
-                <span class="heading">Nr. Abrigos</span><br>
-                <input type="number" class="input" id="nrabrigo">
+                <span class="heading">Número do Endereço</span><br>
+                <input type="number" class="input" id="nrabrigo" required>
             </div>
 
             <div class="field">
                 <span class="heading">Status</span><br>
-                <input type="text" class="input" id="status">
+                <input type="text" class="input" id="status" required>
             </div>
 
             <div class="field">
                 <span class="heading">Capacidade</span><br>
-                <input type="number" class="input" id="capacidade">
+                <input type="number" class="input" id="capacidade" required>
             </div>
 
             <div class="field">
                 <span class="heading">Responsável</span><br>
-                <input type="text" class="input" id="responsavel">
+                <input type="text" class="input" id="responsavel" required>
             </div>
 
             <button class="botao-enviar" type="submit">Enviar</button>
