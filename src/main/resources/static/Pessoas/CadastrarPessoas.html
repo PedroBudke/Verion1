@@ -115,7 +115,35 @@
     .form-container .botao-enviar:hover {
         background-color: var(--cor-hover);
     }
+
+    .form-container .field #genero {
+        width: 600px; /* Ajuste o tamanho conforme necessário */
+        padding: 10px;
+        border: 1px solid var(--cor-linha);
+        border-radius: 5px;
+    }
 </style>
+
+<script>
+    // JavaScript para buscar informações de endereço com base no CEP
+    async function fetchAddressFromCEP() {
+        const cep = document.getElementById('cep').value;
+        if (!cep) return;
+
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+
+        if (data.erro) {
+            alert('CEP não encontrado.');
+        } else {
+            document.getElementById('rua').value = data.logradouro;
+            document.getElementById('bairro').value = data.bairro;
+            document.getElementById('cidade').value = data.localidade;
+            document.getElementById('estado').value = data.uf;
+        }
+    }
+</script>
+
 <body>
 <nav class="dp-menu">
     <ul>
@@ -213,22 +241,22 @@
         <h2>Cadastrar Pessoas</h2>
             <div class="field">
                 <span class="heading">Cpf</span><br>
-                <input type="text" class="input" id="cpfpessoa">
+                <input type="text" class="input" id="cpfpessoa" required>
             </div>
 
             <div class="field">
                 <span class="heading">Nome</span><br>
-                <input type="text" class="input" id="nome">
+                <input type="text" class="input" id="nome" required>
             </div>
 
             <div class="field">
                 <span class="heading">Contato</span><br>
-                <input type="text" class="input" id="contato">
+                <input type="text" class="input" id="contato" required>
             </div>
 
             <div class="field">
                 <span class="heading">Email</span><br>
-                <input type="text" class="input" id="email">
+                <input type="text" class="input" id="email" required>
             </div>
 
             <div class="field">
@@ -244,47 +272,47 @@
 
             <div class="field">
                 <span class="heading">Data De Nascimento</span><br>
-                <input type="date" class="input" id="datanascimento">
+                <input type="date" class="input" id="datanascimento" required>
             </div>
 
             <div class="field">
                 <span class="heading">Cep</span><br>
-                <input type="text" class="input" id="cep">
+                <input type="text" class="input" id="cep" required onblur="fetchAddressFromCEP()">
             </div>
 
             <div class="field">
                 <span class="heading">Rua</span><br>
-                <input type="text" class="input" id="rua">
+                <input type="text" class="input" id="rua" required>
             </div>
 
             <div class="field">
                 <span class="heading">Bairro</span><br>
-                <input type="text" class="input" id="bairro">
+                <input type="text" class="input" id="bairro" required>
             </div>
 
             <div class="field">
                 <span class="heading">Cidade</span><br>
-                <input type="text" class="input" id="cidade">
+                <input type="text" class="input" id="cidade" required>
             </div>
 
             <div class="field">
                 <span class="heading">Estado</span><br>
-                <input type="text" class="input" id="estado">
+                <input type="text" class="input" id="estado" required>
             </div>
 
             <div class="field">
                 <span class="heading">Nr. Residência</span><br>
-                <input type="number" class="input" id="nrresidencia">
+                <input type="number" class="input" id="nrresidencia" required>
             </div>
 
             <div class="field">
                 <span class="heading">Usuario</span><br>
-                <input type="text" class="input" id="usuario">
+                <input type="text" class="input" id="usuario" required>
             </div>
 
             <div class="field">
                 <span class="heading">Senha</span><br>
-                <input type="text" class="input" id="senha">
+                <input type="text" class="input" id="senha" required>
             </div>
 
             <button class="botao-enviar" type="submit">Enviar</button>
