@@ -153,6 +153,12 @@
             input.value = contato;
         }
     }
+
+    function formatarCPF(input) {
+        input.value = input.value.replace(/\D/g, '')
+            .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+            .substr(0, 14);
+    }
 </script>
 
 <body>
@@ -252,7 +258,7 @@
         <h2>Cadastrar Pessoas</h2>
             <div class="field">
                 <span class="heading">Cpf</span><br>
-                <input type="text" class="input" id="cpfpessoa" required>
+                <input type="text" class="input" id="cpfpessoa" required onblur="formatarCPF(this)">
             </div>
 
             <div class="field">
