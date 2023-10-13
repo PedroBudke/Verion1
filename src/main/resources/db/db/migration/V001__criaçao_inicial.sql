@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS abrigos (
                                        abrigo_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                                        abrigo_nome VARCHAR(45) NOT NULL,
-    abrigo_contato VARCHAR(11) NOT NULL,
+    abrigo_contato VARCHAR(15) NOT NULL,
     abrigo_cep VARCHAR(9) NOT NULL,
     abrigo_rua VARCHAR(45) NOT NULL,
     abrigo_bairro VARCHAR(45) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS pessoas (
                                        pessoa_id INT PRIMARY KEY AUTO_INCREMENT,
                                        pessoa_cpf VARCHAR(14) NULL,
     pessoa_nome VARCHAR(45) NOT NULL,
-    pessoa_contato VARCHAR(11) NULL,
+    pessoa_contato VARCHAR(15) NULL,
     pessoa_email VARCHAR(45) NULL,
     pessoa_genero VARCHAR(45) NOT NULL,
     data_nascimento DATE NOT NULL,
