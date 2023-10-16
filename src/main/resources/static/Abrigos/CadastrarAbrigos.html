@@ -287,7 +287,10 @@
 
             <div class="field">
                 <span class="heading">Status</span><br>
-                <input type="text" class="input" id="status" required>
+                <input type="checkbox" id="statusAtivo" name="status" value="Ativo">
+                <label for="statusAtivo">Ativo</label>
+                <input type="checkbox" id="statusInativo" name="status" value="Inativo">
+                <label for="statusInativo">Inativo</label>
             </div>
 
             <div class="field">
@@ -338,9 +341,18 @@
         const cidade = document.getElementById('cidade').value;
         const estado = document.getElementById('estado').value;
         const nrabrigo = parseInt(document.getElementById('nrabrigo').value);
-        const status = document.getElementById('status').value;
         const capacidade = document.getElementById('capacidade').value;
         const responsavel = document.getElementById('responsavel').value;
+
+        let status = 'Ativo'; // Valor padrão se nenhuma checkbox for marcada
+        const statusAtivo = document.getElementById('statusAtivo');
+        const statusInativo = document.getElementById('statusInativo');
+
+        if (statusAtivo.checked) {
+            status = 'Ativo';
+        } else if (statusInativo.checked) {
+            status = 'Inativo';
+        }
 
         const data = {
             abrigo_nome: nome,

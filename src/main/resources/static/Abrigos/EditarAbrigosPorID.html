@@ -123,6 +123,12 @@
             color: var(--cor-primaria);
         }
 
+        #form-editar div {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
         #form-editar input[type="text"] {
             width: 480px;
             padding: 8px;
@@ -147,6 +153,37 @@
             background-color: var(--cor-primaria);
         }
     </style>
+
+    <script>
+        // JavaScript para buscar informações de endereço com base no CEP
+        async function fetchAddressFromCEP() {
+            const cep = document.getElementById('cep').value;
+            if (!cep) return;
+
+            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const data = await response.json();
+
+            if (data.erro) {
+                alert('CEP não encontrado.');
+            } else {
+                document.getElementById('rua').value = data.logradouro;
+                document.getElementById('bairro').value = data.bairro;
+                document.getElementById('cidade').value = data.localidade;
+                document.getElementById('estado').value = data.uf;
+            }
+        }
+
+        // Função para formatar o campo de contato (XX) XXXXX-XXXX
+        function formatarContato(input) {
+            let contato = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+            // Verifica se o número tem pelo menos 10 dígitos (incluindo DDD)
+            if (contato.length >= 10) {
+                contato = `(${contato.slice(0, 2)}) ${contato.slice(2, 7)}-${contato.slice(7, 11)}`;
+                input.value = contato;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -267,29 +304,45 @@
     <h2>Editar Abrigo</h2>
     <form onsubmit="salvarEdicao(event)">
         <input type="hidden" id="edit-abrigo-id" name="abrigo_id">
+
         <label for="edit-abrigo-nome">Nome:</label>
         <input type="text" id="edit-abrigo-nome" name="abrigo_nome">
+
         <label for="edit-abrigo-contato">Contato:</label>
-        <input type="text" id="edit-abrigo-contato" name="abrigo_contato">
+        <input type="text" id="edit-abrigo-contato" name="abrigo_contato" required onblur="formatarContato(this)">
+
         <label for="edit-abrigo-cep">CEP:</label>
-        <input type="text" id="edit-abrigo-cep" name="abrigo_cep">
+        <input type="text" id="edit-abrigo-cep" name="abrigo_cep" required onblur="fetchAddressFromCEP()">
+
         <label for="edit-abrigo-rua">Rua:</label>
         <input type="text" id="edit-abrigo-rua" name="abrigo_rua">
+
         <label for="edit-abrigo-bairro">Bairro:</label>
         <input type="text" id="edit-abrigo-bairro" name="abrigo_bairro">
+
         <label for="edit-abrigo-cidade">Cidade:</label>
         <input type="text" id="edit-abrigo-cidade" name="abrigo_cidade">
+
         <label for="edit-abrigo-estado">Estado:</label>
         <input type="text" id="edit-abrigo-estado" name="abrigo_estado">
+
         <label for="edit-abrigo-nr-abrigos">NR Abrigo:</label>
         <input type="text" id="edit-abrigo-nr-abrigos" name="abrigo_nr_abrigos">
-        <label for="edit-abrigo-status">Status:</label>
-        <input type="text" id="edit-abrigo-status" name="abrigo_status">
+
+        <div class="field">
+            <span class="heading">Status</span><br>
+            <input type="checkbox" id="statusAtivo" name="status" value="Ativo">
+            <span for="statusAtivo">Ativo</span>
+            <input type="checkbox" id="statusInativo" name="status" value="Inativo">
+            <span for="statusInativo">Inativo</span>
+        </div>
+
         <label for="edit-abrigo-capacidade">Capacidade:</label>
         <input type="text" id="edit-abrigo-capacidade" name="abrigo_capacidade">
+
         <label for="edit-abrigo-responsavel">Responsável:</label>
         <input type="text" id="edit-abrigo-responsavel" name="abrigo_responsavel">
-        <!-- Outros campos de edição aqui -->
+
         <button type="submit">Salvar</button>
         <button type="button" onclick="cancelarEdicao()">Cancelar</button>
     </form>
@@ -307,7 +360,16 @@
         document.getElementById('edit-abrigo-cidade').value = abrigos.abrigo_cidade;
         document.getElementById('edit-abrigo-estado').value = abrigos.abrigo_estado;
         document.getElementById('edit-abrigo-nr-abrigos').value = abrigos.abrigo_nr_abrigos;
-        document.getElementById('edit-abrigo-status').value = abrigos.abrigo_status;
+        const ativoCheckbox = document.getElementById('statusAtivo');
+        const inativoCheckbox = document.getElementById('statusInativo');
+
+        if (abrigos.abrigo_status === 'Ativo') {
+            ativoCheckbox.checked = true;
+            inativoCheckbox.checked = false;
+        } else if (abrigos.abrigo_status === 'Inativo') {
+            ativoCheckbox.checked = false;
+            inativoCheckbox.checked = true;
+        }
         document.getElementById('edit-abrigo-capacidade').value = abrigos.abrigo_capacidade;
         document.getElementById('edit-abrigo-responsavel').value = abrigos.abrigo_responsavel;
     }
@@ -348,7 +410,15 @@
         const abrigo_cidade = document.getElementById('edit-abrigo-cidade').value;
         const abrigo_estado = document.getElementById('edit-abrigo-estado').value;
         const abrigo_nr_abrigos = document.getElementById('edit-abrigo-nr-abrigos').value;
-        const abrigo_status = document.getElementById('edit-abrigo-status').value;
+
+        let abrigo_status = 'Ativo'; // Valor padrão se nenhuma checkbox for marcada
+        const statusAtivo = document.getElementById('statusAtivo');
+        const statusInativo = document.getElementById('statusInativo');
+
+        if (statusInativo.checked) {
+            abrigo_status = 'Inativo';
+        }
+
         const abrigo_capacidade = document.getElementById('edit-abrigo-capacidade').value;
         const abrigo_responsavel = document.getElementById('edit-abrigo-responsavel').value;
 
