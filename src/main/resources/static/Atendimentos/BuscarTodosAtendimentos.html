@@ -205,6 +205,13 @@
 </table>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    function formatarData(data) {
+        const dataObj = new Date(data);
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
+        const ano = dataObj.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
     function BuscarTodosAtendimentos() {
         axios.get(`/atendimentos/todos`)
             .then(response => {
@@ -217,7 +224,7 @@
                     row.insertCell().innerText = atendimentos.atendimento_id;
                     row.insertCell().innerText = atendimentos.abrigo_id;
                     row.insertCell().innerText = atendimentos.pessoa_id;
-                    row.insertCell().innerText = atendimentos.atendimento_data;
+                    row.insertCell().innerText = formatarData(atendimentos.atendimento_data);
                     row.insertCell().innerText = atendimentos.observacao;
                     row.insertCell().innerText = atendimentos.tomada_decisao;
                     row.insertCell().innerText = atendimentos.atendimento_responsavel;

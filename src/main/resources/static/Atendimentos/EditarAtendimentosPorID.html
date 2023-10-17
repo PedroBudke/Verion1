@@ -291,11 +291,26 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    function formatarData(data) {
+        const dataObj = new Date(data);
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
+        const ano = dataObj.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
+
+    function formatarDataParaBancoDeDados(data) {
+        const dataObj = new Date(data);
+        const ano = dataObj.getFullYear();
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        return `${ano}-${mes}-${dia}`;
+    }
     function preencherFormularioEdicao(atendimento) {
         document.getElementById('edit-atendimento-id').value = atendimento.atendimento_id;
         document.getElementById('edit-abrigo-id').value = atendimento.abrigo_id;
         document.getElementById('edit-pessoa-id').value = atendimento.pessoa_id;
-        document.getElementById('edit-atendimento-data').value = atendimento.atendimento_data;
+        document.getElementById('edit-atendimento-data').value = formatarData(atendimento.atendimento_data);
         document.getElementById('edit-observacao').value = atendimento.observacao;
         document.getElementById('edit-tomadadecisao').value = atendimento.tomada_decisao;
         document.getElementById('edit-atendimento_responsavel').value = atendimento.atendimento_responsavel;
@@ -331,7 +346,7 @@
         const atendimento_id = document.getElementById('edit-atendimento-id').value;
         const abrigo_id = document.getElementById('edit-abrigo-id').value;
         const pessoa_id = document.getElementById('edit-pessoa-id').value;
-        const atendimento_data = document.getElementById('edit-atendimento-data').value;
+        const atendimento_data = formatarDataParaBancoDeDados(document.getElementById('edit-atendimento-data').value);
         const observacao = document.getElementById('edit-observacao').value;
         const tomada_decisao = document.getElementById('edit-tomadadecisao').value;
         const atendimento_responsavel = document.getElementById('edit-atendimento_responsavel').value;
@@ -369,7 +384,7 @@
                     row.insertCell().innerText = atendimentos.atendimento_id;
                     row.insertCell().innerText = atendimentos.abrigo_id;
                     row.insertCell().innerText = atendimentos.pessoa_id;
-                    row.insertCell().innerText = atendimentos.atendimento_data;
+                    row.insertCell().innerText = formatarData(atendimentos.atendimento_data);
                     row.insertCell().innerText = atendimentos.observacao;
                     row.insertCell().innerText = atendimentos.tomada_decisao;
                     row.insertCell().innerText = atendimentos.atendimento_responsavel;

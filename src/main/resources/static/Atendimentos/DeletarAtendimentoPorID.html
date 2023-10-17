@@ -218,6 +218,13 @@
 </table>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    function formatarData(data) {
+        const dataObj = new Date(data);
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
+        const ano = dataObj.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
     // Função para excluir um atendimento
     function excluirAtendimento(atendimentoId) {
         axios.delete(`/atendimentos/${atendimentoId}`)
@@ -240,7 +247,11 @@
             row.insertCell().innerText = atendimento.atendimento_id;
             row.insertCell().innerText = atendimento.abrigo_id;
             row.insertCell().innerText = atendimento.pessoa_id;
-            row.insertCell().innerText = atendimento.atendimento_data;
+
+            // Formatar a data e inserir na célula
+            const dataFormatada = formatarData(atendimento.atendimento_data);
+            row.insertCell().innerText = dataFormatada;
+
             row.insertCell().innerText = atendimento.observacao;
             row.insertCell().innerText = atendimento.tomada_decisao;
             row.insertCell().innerText = atendimento.atendimento_responsavel;
