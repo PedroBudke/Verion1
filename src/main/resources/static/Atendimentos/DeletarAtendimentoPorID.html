@@ -247,11 +247,7 @@
             row.insertCell().innerText = atendimento.atendimento_id;
             row.insertCell().innerText = atendimento.abrigo_id;
             row.insertCell().innerText = atendimento.pessoa_id;
-
-            // Formatar a data e inserir na célula
-            const dataFormatada = formatarData(atendimento.atendimento_data);
-            row.insertCell().innerText = dataFormatada;
-
+            row.insertCell().innerText = formatarData(atendimento.atendimento_data);
             row.insertCell().innerText = atendimento.observacao;
             row.insertCell().innerText = atendimento.tomada_decisao;
             row.insertCell().innerText = atendimento.atendimento_responsavel;

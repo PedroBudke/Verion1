@@ -283,11 +283,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
+    function formatarData(data) {
+        const dataObj = new Date(data);
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
+        const ano = dataObj.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
+
+    function formatarDataParaBancoDeDados(data) {
+        const dataObj = new Date(data);
+        const ano = dataObj.getFullYear();
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        return `${ano}-${mes}-${dia}`;
+    }
+
     function preencherFormularioEdicao(designacao) {
         document.getElementById('edit-designacao-id').value = designacao.designacao_id;
         document.getElementById('edit-abrigo-id').value = designacao.abrigo_id;
         document.getElementById('edit-pessoa-id').value = designacao.pessoa_id;
-        document.getElementById('edit-designacao-data').value = designacao.designacao_data;
+        document.getElementById('edit-designacao-data').value = formatarData(designacao.designacao_data);
         document.getElementById('edit-designacao-responsavel').value = designacao.designacao_responsavel;
     }
 
@@ -321,7 +338,7 @@
         const designacao_id = document.getElementById('edit-designacao-id').value;
         const abrigo_id = document.getElementById('edit-abrigo-id').value;
         const pessoa_id = document.getElementById('edit-pessoa-id').value;
-        const designacao_data = document.getElementById('edit-designacao-data').value;
+        const designacao_data = formatarDataParaBancoDeDados(document.getElementById('edit-designacao-data').value);
         const designacao_responsavel = document.getElementById('edit-designacao-responsavel').value;
 
         // Construa um objeto com os dados que você deseja enviar ao servidor
@@ -355,7 +372,7 @@
                     row.insertCell().innerText = designacao.designacao_id;
                     row.insertCell().innerText = designacao.abrigo_id;
                     row.insertCell().innerText = designacao.pessoa_id;
-                    row.insertCell().innerText = designacao.designacao_data;
+                    row.insertCell().innerText = formatarData(designacao.designacao_data);
                     row.insertCell().innerText = designacao.designacao_responsavel;
 
                     // Adicione um botão de edição
