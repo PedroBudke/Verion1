@@ -323,6 +323,23 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
+    function formatarData(data) {
+        const dataObj = new Date(data);
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
+        const ano = dataObj.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
+
+    function formatarDataParaBancoDeDados(data) {
+        const dataObj = new Date(data);
+        const ano = dataObj.getFullYear();
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        return `${ano}-${mes}-${dia}`;
+    }
+
     function preencherFormularioEdicao(pessoas) {
         document.getElementById('edit-pessoa-id').value = pessoas.pessoa_id;
         document.getElementById('edit-pessoa-cpf').value = pessoas.pessoa_cpf;
@@ -330,7 +347,7 @@
         document.getElementById('edit-pessoa-contato').value = pessoas.pessoa_contato;
         document.getElementById('edit-pessoa-email').value = pessoas.pessoa_email;
         document.getElementById('edit-pessoa-genero').value = pessoas.pessoa_genero;
-        document.getElementById('edit-data-nascimento').value = pessoas.data_nascimento;
+        document.getElementById('edit-data-nascimento').value = formatarData(pessoas.data_nascimento);
         document.getElementById('edit-pessoa-cep').value = pessoas.pessoa_cep;
         document.getElementById('edit-pessoa-rua').value = pessoas.pessoa_rua;
         document.getElementById('edit-pessoa-bairro').value = pessoas.pessoa_bairro;
@@ -375,7 +392,7 @@
         const pessoa_contato = document.getElementById('edit-pessoa-contato').value;
         const pessoa_email = document.getElementById('edit-pessoa-email').value;
         const pessoa_genero = document.getElementById('edit-pessoa-genero').value;
-        const data_nascimento = document.getElementById('edit-data-nascimento').value;
+        const data_nascimento = formatarDataParaBancoDeDados(document.getElementById('edit-data-nascimento').value);
         const pessoa_cep = document.getElementById('edit-pessoa-cep').value;
         const pessoa_rua = document.getElementById('edit-pessoa-rua').value;
         const pessoa_bairro = document.getElementById('edit-pessoa-bairro').value;
@@ -429,7 +446,7 @@
                     row.insertCell().innerText = pessoas.pessoa_contato;
                     row.insertCell().innerText = pessoas.pessoa_email;
                     row.insertCell().innerText = pessoas.pessoa_genero;
-                    row.insertCell().innerText = pessoas.data_nascimento;
+                    row.insertCell().innerText = formatarData(pessoas.data_nascimento);
                     row.insertCell().innerText = pessoas.pessoa_cep;
                     row.insertCell().innerText = pessoas.pessoa_rua;
                     row.insertCell().innerText = pessoas.pessoa_bairro;

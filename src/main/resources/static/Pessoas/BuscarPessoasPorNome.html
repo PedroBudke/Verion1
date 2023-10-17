@@ -255,6 +255,15 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
+    function formatarData(data) {
+        const dataObj = new Date(data);
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
+        const ano = dataObj.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
+
     function BuscarPessoasPorNome() {
         const pessoa_nome = document.getElementById('pessoa_nome').value;
         const tabela = document.getElementById('tabela-pessoas').getElementsByTagName('tbody')[0];
@@ -272,7 +281,7 @@
                     row.insertCell().innerText = pessoas.pessoa_contato;
                     row.insertCell().innerText = pessoas.pessoa_email;
                     row.insertCell().innerText = pessoas.pessoa_genero;
-                    row.insertCell().innerText = pessoas.data_nascimento;
+                    row.insertCell().innerText = formatarData(pessoas.data_nascimento);
                     row.insertCell().innerText = pessoas.pessoa_cep;
                     row.insertCell().innerText = pessoas.pessoa_rua;
                     row.insertCell().innerText = pessoas.pessoa_bairro;
