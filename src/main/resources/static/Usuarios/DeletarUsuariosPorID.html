@@ -214,16 +214,18 @@
 </table>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    // Função para excluir um atendimento
-    function excluirUsuarios(usuario_id) {
-        axios.delete(`/usuario/${usuario_id}`)
-            .then(response => {
-                // Atualizar a tabela após a exclusão
-                BuscarTodosUsuarios();
-            })
-            .catch(error => {
-                console.error('Erro ao excluir o Usuario:', error);
-            });
+    function excluirUsuariosComConfirmacao(usuario_id) {
+        const confirmacao = window.confirm('Tem certeza de que deseja excluir esse Usuário?');
+        if (confirmacao) {
+            axios.delete(`/usuario/${usuario_id}`)
+                .then(response => {
+                    // Atualizar a tabela após a exclusão
+                    BuscarTodosAbrigos();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir o Usuário:', error);
+                });
+        }
     }
 
     // Função para preencher a tabela com os dados dos atendimentos
@@ -237,12 +239,11 @@
             row.insertCell().innerText = usuarios.usuario_cpf;
             row.insertCell().innerText = usuarios.usuario_email;
 
-            // Adicionar um botão de exclusão
             const cellAcoes = row.insertCell();
             const btnExcluir = document.createElement('button');
-            btnExcluir.innerHTML = '<i class="fas fa-trash"></i> Excluir'; // Ícone de lixeira
+            btnExcluir.textContent = 'Excluir';
             btnExcluir.addEventListener('click', () => {
-                excluirUsuarios(usuarios.usuario_id);
+                excluirUsuariosComConfirmacao(usuarios.usuario_id);
             });
             cellAcoes.appendChild(btnExcluir);
         });

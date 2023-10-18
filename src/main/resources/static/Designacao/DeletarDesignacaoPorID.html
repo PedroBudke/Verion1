@@ -216,6 +216,19 @@
 </table>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    function excluirDesignacaoComConfirmacao(designacao_id) {
+        const confirmacao = window.confirm('Tem certeza de que deseja excluir essa Designação?');
+        if (confirmacao) {
+            axios.delete(`/designacao/${designacao_id}`)
+                .then(response => {
+                    // Atualizar a tabela após a exclusão
+                    BuscarTodosAbrigos();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir a Designação:', error);
+                });
+        }
+    }
 
     function formatarData(data) {
         const dataObj = new Date(data);
@@ -223,18 +236,6 @@
         const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
         const ano = dataObj.getFullYear();
         return `${dia}/${mes}/${ano}`;
-    }
-
-    // Função para excluir um atendimento
-    function excluirDesignacao(designacao_id) {
-        axios.delete(`/designacao/${designacao_id}`)
-            .then(response => {
-                // Atualizar a tabela após a exclusão
-                BuscarTodasDesignacoes();
-            })
-            .catch(error => {
-                console.error('Erro ao excluir a Designação:', error);
-            });
     }
 
     // Função para preencher a tabela com os dados dos atendimentos
@@ -250,12 +251,11 @@
             row.insertCell().innerText = formatarData(designacao.designacao_data);
             row.insertCell().innerText = designacao.designacao_responsavel;
 
-            // Adicionar um botão de exclusão
             const cellAcoes = row.insertCell();
             const btnExcluir = document.createElement('button');
-            btnExcluir.innerHTML = '<i class="fas fa-trash"></i> Excluir'; // Ícone de lixeira
+            btnExcluir.textContent = 'Excluir';
             btnExcluir.addEventListener('click', () => {
-                excluirDesignacao(designacao.designacao_id);
+                excluirDesignacaoComConfirmacao(designacao.designacao_id);
             });
             cellAcoes.appendChild(btnExcluir);
         });

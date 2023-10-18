@@ -225,16 +225,18 @@
 </table>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    // Função para excluir um abrigo
-    function excluirAbrigo(abrigoId) {
-        axios.delete(`/abrigos/${abrigoId}`)
-            .then(response => {
-                // Atualizar a tabela após a exclusão
-                BuscarTodosAbrigos();
-            })
-            .catch(error => {
-                console.error('Erro ao excluir o Abrigo:', error);
-            });
+    function excluirAbrigoComConfirmacao(abrigo_id) {
+        const confirmacao = window.confirm('Tem certeza de que deseja excluir este abrigo?');
+        if (confirmacao) {
+            axios.delete(`/abrigos/${abrigo_id}`)
+                .then(response => {
+                    // Atualizar a tabela após a exclusão
+                    BuscarTodosAbrigos();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir o Abrigo:', error);
+                });
+        }
     }
 
     // Função para preencher a tabela com os dados dos abrigos
@@ -260,9 +262,9 @@
             // Adicionar um botão de exclusão
             const cellAcoes = row.insertCell();
             const btnExcluir = document.createElement('button');
-            btnExcluir.innerText = 'Excluir';
+            btnExcluir.textContent = 'Excluir';
             btnExcluir.addEventListener('click', () => {
-                excluirAbrigo(abrigo.abrigo_id);
+                excluirAbrigoComConfirmacao(abrigo.abrigo_id);
             });
             cellAcoes.appendChild(btnExcluir);
         });

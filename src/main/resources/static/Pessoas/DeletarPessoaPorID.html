@@ -225,25 +225,25 @@
 </table>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-
+    function excluirPessoasComConfirmacao(pessoa_id) {
+        const confirmacao = window.confirm('Tem certeza de que deseja excluir essa Pessoa?');
+        if (confirmacao) {
+            axios.delete(`/pessoas/${pessoa_id}`)
+                .then(response => {
+                    // Atualizar a tabela após a exclusão
+                    BuscarTodosAbrigos();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir a Pessoa:', error);
+                });
+        }
+    }
     function formatarData(data) {
         const dataObj = new Date(data);
         const dia = String(dataObj.getDate()).padStart(2, '0');
         const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
         const ano = dataObj.getFullYear();
         return `${dia}/${mes}/${ano}`;
-    }
-
-    // Função para excluir um atendimento
-    function excluirPessoas(pessoa_id) {
-        axios.delete(`/pessoas/${pessoa_id}`)
-            .then(response => {
-                // Atualizar a tabela após a exclusão
-                BuscarTodasPessoas();
-            })
-            .catch(error => {
-                console.error('Erro ao excluir a Pessoa:', error);
-            });
     }
 
     // Função para preencher a tabela com os dados dos atendimentos
@@ -268,12 +268,11 @@
             row.insertCell().innerText = pessoas.pessoa_nr_residencia;
             row.insertCell().innerText = pessoas.pessoa_usuario;
 
-            // Adicionar um botão de exclusão
             const cellAcoes = row.insertCell();
             const btnExcluir = document.createElement('button');
-            btnExcluir.innerHTML = '<i class="fas fa-trash"></i> Excluir'; // Ícone de lixeira
+            btnExcluir.textContent = 'Excluir';
             btnExcluir.addEventListener('click', () => {
-                excluirPessoas(pessoas.pessoa_id);
+                excluirPessoasComConfirmacao(pessoas.pessoa_id);
             });
             cellAcoes.appendChild(btnExcluir);
         });

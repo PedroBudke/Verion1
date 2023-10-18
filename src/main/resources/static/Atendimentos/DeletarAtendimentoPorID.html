@@ -218,23 +218,26 @@
 </table>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    function excluirAtendimentoComConfirmacao(atendimento_id) {
+        const confirmacao = window.confirm('Tem certeza de que deseja excluir este Atendimento?');
+        if (confirmacao) {
+            axios.delete(`/atendimentos/${atendimento_id}`)
+                .then(response => {
+                    // Atualizar a tabela após a exclusão
+                    BuscarTodosAbrigos();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir o Atendimento:', error);
+                });
+        }
+    }
+
     function formatarData(data) {
         const dataObj = new Date(data);
         const dia = String(dataObj.getDate()).padStart(2, '0');
         const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
         const ano = dataObj.getFullYear();
         return `${dia}/${mes}/${ano}`;
-    }
-    // Função para excluir um atendimento
-    function excluirAtendimento(atendimentoId) {
-        axios.delete(`/atendimentos/${atendimentoId}`)
-            .then(response => {
-                // Atualizar a tabela após a exclusão
-                BuscarTodosAtendimentos();
-            })
-            .catch(error => {
-                console.error('Erro ao excluir o Atendimento:', error);
-            });
     }
 
     // Função para preencher a tabela com os dados dos atendimentos
@@ -252,12 +255,11 @@
             row.insertCell().innerText = atendimento.tomada_decisao;
             row.insertCell().innerText = atendimento.atendimento_responsavel;
 
-            // Adicionar um botão de exclusão
             const cellAcoes = row.insertCell();
             const btnExcluir = document.createElement('button');
-            btnExcluir.innerHTML = '<i class="fas fa-trash"></i> Excluir'; // Ícone de lixeira
+            btnExcluir.textContent = 'Excluir';
             btnExcluir.addEventListener('click', () => {
-                excluirAtendimento(atendimento.atendimento_id);
+                excluirAtendimentoComConfirmacao(atendimento.atendimento_id);
             });
             cellAcoes.appendChild(btnExcluir);
         });
