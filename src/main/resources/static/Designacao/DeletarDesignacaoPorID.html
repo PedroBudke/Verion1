@@ -8,9 +8,9 @@
     <title>Deletar Designações Por ID</title>
     <style>
         :root {
-            --cor-fundo: #ffffff; /* Cor de fundo principal */
-            --cor-hover: rgb(3, 4, 94);
-            --cor-primaria: rgb(0, 119, 182);
+            --cor-fundo: #CAF0F8; /* Cor de fundo principal */
+            --cor-hover: rgb(0, 119, 182);
+            --cor-primaria: rgb(3, 4, 94);
             --cor-linha: #90E0EF;
         }
 
@@ -103,6 +103,27 @@
 
         button:hover {
             background-color: #FF0000; /* Cor de fundo no hover */
+        }
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50%; /* Ajuste a posição vertical para 50% da tela */
+            left: 50%; /* Ajuste a posição horizontal para 50% da tela */
+            transform: translate(-50%, -50%); /* Centraliza a div */
+            background-color: var(--cor-hover);
+            width: 300px; /* Largura desejada */
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
         }
     </style>
 </head>
@@ -214,20 +235,41 @@
     <!-- Os dados serão carregados aqui dinamicamente -->
     </tbody>
 </table>
+
+<div id="modalExclusao" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p>Tem certeza de que deseja excluir esta designação?</p>
+        <button id="confirmarExclusao">Sim</button>
+        <button id="cancelarExclusao">Cancelar</button>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     function excluirDesignacaoComConfirmacao(designacao_id) {
-        const confirmacao = window.confirm('Tem certeza de que deseja excluir essa Designação?');
-        if (confirmacao) {
+        const modal = document.getElementById('modalExclusao');
+        modal.style.display = 'block';
+
+        const confirmarExclusao = document.getElementById('confirmarExclusao');
+        const cancelarExclusao = document.getElementById('cancelarExclusao');
+
+        confirmarExclusao.addEventListener('click', () => {
+            modal.style.display = 'none';
+            // Realize a exclusão
             axios.delete(`/designacao/${designacao_id}`)
                 .then(response => {
-                    // Atualizar a tabela após a exclusão
-                    BuscarTodosAbrigos();
+                    // Atualize a tabela após a exclusão
+                    BuscarTodasDesignacoes();
                 })
                 .catch(error => {
-                    console.error('Erro ao excluir a Designação:', error);
+                    console.error('Erro ao excluir a designação:', error);
+                    exibirMensagemErro();
                 });
-        }
+        });
+
+        cancelarExclusao.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
     }
 
     function formatarData(data) {

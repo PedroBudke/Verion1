@@ -8,9 +8,9 @@
     <title>Deletar Pessoas Por ID</title>
     <style>
         :root {
-            --cor-fundo: #ffffff; /* Cor de fundo principal */
-            --cor-hover: rgb(3, 4, 94);
-            --cor-primaria: rgb(0, 119, 182);
+            --cor-fundo: #CAF0F8; /* Cor de fundo principal */
+            --cor-hover: rgb(0, 119, 182);
+            --cor-primaria: rgb(3, 4, 94);
             --cor-linha: #90E0EF;
         }
 
@@ -103,6 +103,27 @@
 
         button:hover {
             background-color: #FF0000; /* Cor de fundo no hover */
+        }
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50%; /* Ajuste a posição vertical para 50% da tela */
+            left: 50%; /* Ajuste a posição horizontal para 50% da tela */
+            transform: translate(-50%, -50%); /* Centraliza a div */
+            background-color: var(--cor-hover);
+            width: 300px; /* Largura desejada */
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
         }
     </style>
 </head>
@@ -223,20 +244,58 @@
     <!-- Os dados serão carregados aqui dinamicamente -->
     </tbody>
 </table>
+
+<div id="modalExclusao" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p>Tem certeza de que deseja excluir esta pessoa?</p>
+        <button id="confirmarExclusao">Sim</button>
+        <button id="cancelarExclusao">Cancelar</button>
+    </div>
+</div>
+
+<div id="mensagemErro" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p>Esta pessoa não pode ser excluída pois tem um vinculo em outra tabela.</p>
+        <button id="fecharMensagemErro">Fechar</button>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    function exibirMensagemErro() {
+        const modalErro = document.getElementById('mensagemErro');
+        modalErro.style.display = 'block';
+
+        const fecharMensagemErro = document.getElementById('fecharMensagemErro');
+
+        fecharMensagemErro.addEventListener('click', () => {
+            modalErro.style.display = 'none';
+        });
+    }
+    // Função para exibir o modal de exclusão
     function excluirPessoasComConfirmacao(pessoa_id) {
-        const confirmacao = window.confirm('Tem certeza de que deseja excluir essa Pessoa?');
-        if (confirmacao) {
+        const modal = document.getElementById('modalExclusao');
+        modal.style.display = 'block';
+
+        const confirmarExclusao = document.getElementById('confirmarExclusao');
+        const cancelarExclusao = document.getElementById('cancelarExclusao');
+
+        confirmarExclusao.addEventListener('click', () => {
+            modal.style.display = 'none';
+            // Realize a exclusão
             axios.delete(`/pessoas/${pessoa_id}`)
                 .then(response => {
-                    // Atualizar a tabela após a exclusão
-                    BuscarTodosAbrigos();
+                    // Atualize a tabela após a exclusão
+                    BuscarTodasPessoas();
                 })
                 .catch(error => {
-                    console.error('Erro ao excluir a Pessoa:', error);
+                    console.error('Erro ao excluir a pessoa:', error);
+                    exibirMensagemErro();
                 });
-        }
+        });
+
+        cancelarExclusao.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
     }
     function formatarData(data) {
         const dataObj = new Date(data);
