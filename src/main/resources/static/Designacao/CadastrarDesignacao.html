@@ -7,9 +7,9 @@
 </head>
 <style>
     :root {
-        --cor-fundo: #ffffff; /* Cor de fundo principal */
-        --cor-hover: rgb(3, 4, 94);
-        --cor-primaria: rgb(0, 119, 182);
+        --cor-fundo: #CAF0F8; /* Cor de fundo principal */
+        --cor-hover: rgb(0, 119, 182);
+        --cor-primaria: rgb(3, 4, 94);
         --cor-linha: #90E0EF;
     }
 
@@ -20,12 +20,14 @@
         background-color: var(--cor-fundo);
     }
 
-    .dp-menu ul {
-        list-style-type: none;
-        padding: 0;
+    .dp-menu {
+        display: flex;
+        justify-content: center;
     }
 
     .dp-menu ul {
+        list-style-type: none;
+        padding: 0;
         background-color: var(--cor-fundo);
     }
 
@@ -44,6 +46,7 @@
 
     .dp-menu ul a:hover {
         background-color: var(--cor-hover);
+        color: #fff; /* Cor do texto no hover */
     }
 
     /*sub-menu*/
@@ -51,27 +54,24 @@
         display: none;
         left: 0;
         position: absolute;
+        width: 150px;
     }
 
     .dp-menu ul li:hover ul {
         display: block;
     }
 
-    .dp-menu ul ul {
-        width: 150px;
-    }
 
     .dp-menu ul ul li a {
         display: block;
     }
 
-    /* Estilo para o formulário de cadastro */
     .form-container {
         max-width: 600px;
         margin: 0 auto;
         padding: 20px;
-        background-color: var(--cor-fundo);
-        border: 1px solid var(--cor-linha);
+        background-color: var(--cor-linha);
+        border: 1px solid var(--cor-primaria);
         border-radius: 5px;
     }
 
@@ -95,25 +95,41 @@
     }
 
     .form-container .field .input {
-        width: 550px;
+        background-color: var(--cor-fundo);
+        width: 96%;
         padding: 10px;
-        border: 1px solid var(--cor-linha);
+        border: 1px solid var(--cor-primaria);
         border-radius: 5px;
+        transition: var(--cor-primaria);
     }
 
     .form-container .botao-enviar {
         display: block;
         margin: 20px auto;
-        background-color: var(--cor-primaria);
-        color: var(--cor-fundo);
+        color: #fff; /* Cor do texto do botão */
         padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
         cursor: pointer;
+        border: none;
+        font-size: 17px;
+        border-radius: 7px;
+        letter-spacing: 4px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.5s;
+        transition-property: box-shadow;
+        background: rgb(0, 140, 255);
+        box-shadow: 0 0 25px rgb(0, 140, 255);
     }
 
     .form-container .botao-enviar:hover {
-        background-color: var(--cor-hover);
+        box-shadow: 0 0 5px rgb(0, 140, 255),
+        0 0 25px rgb(0, 140, 255),
+        0 0 50px rgb(0, 140, 255),
+        0 0 100px rgb(0, 140, 255);
+    }
+
+    .form-container .grupo   {
+        border: 1px solid var(--cor-linha);
     }
 </style>
 <body>
@@ -210,7 +226,7 @@
 <div class="form-container">
     <form id="designacaoForm">
         <fieldset class="grupo">
-            <h2>Cadastrar Designação</h2>
+            <h2>Cadastrar Designações</h2>
 
             <div class="field">
                 <span class="heading">Id Abrigo</span><br>
@@ -232,7 +248,7 @@
                 <input type="text" class="input" id="responsavel">
             </div>
 
-            <button class="botao-enviar" type="submit">Enviar</button>
+            <button class="botao-enviar" type="submit">Cadastrar</button>
 
         </fieldset>
     </form>
