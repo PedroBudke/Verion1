@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +18,11 @@
             margin: 0;
             padding: 0;
             background-color: var(--cor-fundo);
+        }
+
+        .dp-menu {
+            display: flex;
+            justify-content: center;
         }
 
         .dp-menu ul {
@@ -41,6 +46,7 @@
 
         .dp-menu ul a:hover {
             background-color: var(--cor-hover);
+            color: #fff; /* Cor do texto no hover */
         }
 
         /*sub-menu*/
@@ -48,14 +54,11 @@
             display: none;
             left: 0;
             position: absolute;
+            width: 150px;
         }
 
         .dp-menu ul li:hover ul {
             display: block;
-        }
-
-        .dp-menu ul ul {
-            width: 150px;
         }
 
         .dp-menu ul ul li a {
@@ -105,16 +108,17 @@
 
         /* Estilização do formulário */
         #form-editar {
-            max-width: 500px; /* Defina a largura máxima desejada */
-            margin: 20px auto; /* Centraliza o formulário horizontalmente e adiciona margens */
+            max-width: 600px;
+            margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+            background-color: var(--cor-linha);
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
         }
 
         #form-editar h2 {
-            margin-bottom: 20px;
             color: var(--cor-primaria);
+            text-align: center;
         }
 
         #form-editar label {
@@ -129,29 +133,64 @@
             color: var(--cor-primaria);
         }
 
-        #form-editar input[type="text"] {
-            width: 480px;
-            padding: 8px;
+        #form-editar .field {
             margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        }
+
+        #form-editar input[type="text"] {
+            background-color: var(--cor-fundo);
+            width: 96%;
+            padding: 10px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+            transition: var(--cor-primaria);
+            margin-bottom: 10px; /* Aumente o valor para aumentar o espaçamento vertical */
         }
 
         #form-editar button[type="submit"],
         #form-editar button[type="button"] {
-                background-color: var(--cor-hover); /* Cor de fundo no hover */
-                color: #fff; /* Cor do texto branca */
-                padding: 5px 10px; /* Espaçamento interno do botão */
-                cursor: pointer; /* Alterar o cursor para indicar que é clicável */
-                border: none; /* Sem borda */
-                border-radius: 5px; /* Adicione um pequeno raio de borda para arredondar os cantos */
-                transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
+            color: #fff; /* Cor do texto do botão */
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 17px;
+            border-radius: 7px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.5s;
+            transition-property: box-shadow;
+            background: rgb(0, 140, 255);
+            box-shadow: 0 0 25px rgb(0, 140, 255);
             }
 
         #form-editar button[type="submit"]:hover,
         #form-editar button[type="button"]:hover {
-            background-color: var(--cor-primaria);
+            box-shadow: 0 0 5px rgb(0, 140, 255),
+            0 0 25px rgb(0, 140, 255),
+            0 0 50px rgb(0, 140, 255),
+            0 0 100px rgb(0, 140, 255);
         }
+
+        .field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .custom-radio {
+            transform: scale(1.5); /* Aumenta o tamanho da bolinha de seleção */
+            margin-right: 10px; /* Espaço entre o radio button e o rótulo */
+        }
+
+        /* Estilo para o rótulo do radio button */
+        .custom-label {
+            color: var(--cor-primaria);
+            font-size: 16px;
+        }
+
     </style>
 
     <script>
@@ -300,51 +339,51 @@
     </tbody>
 </table>
 
-<div id="form-editar" style="display: none;">
+<div id="form-editar" class="form-container" style="display: none;">
     <h2>Editar Abrigo</h2>
     <form onsubmit="salvarEdicao(event)">
         <input type="hidden" id="edit-abrigo-id" name="abrigo_id">
 
-        <label for="edit-abrigo-nome">Nome:</label>
+        <label for="edit-abrigo-nome">Nome</label>
         <input type="text" id="edit-abrigo-nome" name="abrigo_nome">
 
-        <label for="edit-abrigo-contato">Contato:</label>
+        <label for="edit-abrigo-contato">Contato</label>
         <input type="text" id="edit-abrigo-contato" name="abrigo_contato" required onblur="formatarContato(this)">
 
-        <label for="edit-abrigo-cep">CEP:</label>
+        <label for="edit-abrigo-cep">Cep</label>
         <input type="text" id="edit-abrigo-cep" name="abrigo_cep" required onblur="fetchAddressFromCEP()">
 
-        <label for="edit-abrigo-rua">Rua:</label>
+        <label for="edit-abrigo-rua">Rua</label>
         <input type="text" id="edit-abrigo-rua" name="abrigo_rua">
 
-        <label for="edit-abrigo-bairro">Bairro:</label>
+        <label for="edit-abrigo-bairro">Bairro</label>
         <input type="text" id="edit-abrigo-bairro" name="abrigo_bairro">
 
-        <label for="edit-abrigo-cidade">Cidade:</label>
+        <label for="edit-abrigo-cidade">Cidade</label>
         <input type="text" id="edit-abrigo-cidade" name="abrigo_cidade">
 
-        <label for="edit-abrigo-estado">Estado:</label>
+        <label for="edit-abrigo-estado">Estado</label>
         <input type="text" id="edit-abrigo-estado" name="abrigo_estado">
 
-        <label for="edit-abrigo-nr-abrigos">NR Abrigo:</label>
+        <label for="edit-abrigo-nr-abrigos">Número do Endereço:</label>
         <input type="text" id="edit-abrigo-nr-abrigos" name="abrigo_nr_abrigos">
 
         <div class="field">
-            <span class="heading">Status</span><br>
-            <input type="radio" id="statusAtivo" name="status" value="Ativo">
-            <span for="statusAtivo">Ativo</span>
-            <input type="radio" id="statusInativo" name="status" value="Inativo">
-            <span for="statusInativo">Inativo</span>
+            <span class="heading">Status</span><br><br>
+            <input type="radio" id="statusAtivo" name="status" value="Ativo" required class="custom-radio" style="display: inline-block;">
+            <label for="statusAtivo" class="custom-label" style="display: inline-block;">Ativo</label>
+            <input type="radio" id="statusInativo" name="status" value="Inativo" required class="custom-radio" style="display: inline-block;">
+            <label for="statusInativo" class="custom-label" style="display: inline-block;">Inativo</label>
         </div>
 
-        <label for="edit-abrigo-capacidade">Capacidade:</label>
+        <label for="edit-abrigo-capacidade">Capacidade</label>
         <input type="text" id="edit-abrigo-capacidade" name="abrigo_capacidade">
 
-        <label for="edit-abrigo-responsavel">Responsável:</label>
+        <label for="edit-abrigo-responsavel">Responsável</label>
         <input type="text" id="edit-abrigo-responsavel" name="abrigo_responsavel">
 
-        <button type="submit">Salvar</button>
-        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+        <button type="submit" class="botao-enviar">Salvar</button>
+        <button type="button" class="botao-enviar" onclick="cancelarEdicao()">Cancelar</button>
     </form>
 </div>
 

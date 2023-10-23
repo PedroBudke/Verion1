@@ -21,12 +21,14 @@
             background-color: var(--cor-fundo);
         }
 
-        .dp-menu ul {
-            list-style-type: none;
-            padding: 0;
+        .dp-menu {
+            display: flex;
+            justify-content: center;
         }
 
         .dp-menu ul {
+            list-style-type: none;
+            padding: 0;
             background-color: var(--cor-fundo);
         }
 
@@ -45,6 +47,7 @@
 
         .dp-menu ul a:hover {
             background-color: var(--cor-hover);
+            color: #fff; /* Cor do texto no hover */
         }
 
         /*sub-menu*/
@@ -52,14 +55,11 @@
             display: none;
             left: 0;
             position: absolute;
+            width: 150px;
         }
 
         .dp-menu ul li:hover ul {
             display: block;
-        }
-
-        .dp-menu ul ul {
-            width: 150px;
         }
 
         .dp-menu ul ul li a {
@@ -68,9 +68,14 @@
 
         /* Estilo para a caixa de pergunta */
         .caixa-pergunta {
-            display: flex; /* Tornar os elementos filhos flexíveis */
-            align-items: center; /* Alinhar verticalmente ao centro */
             font-size: 18px;
+            text-align: center; /* Alinhe o texto centralmente */
+        }
+
+        .caixa-pergunta-container {
+            display: block;
+            text-align: center; /* Alinhe o conteúdo no centro */
+            height: 100vh; /* Isso ajuda a centralizar verticalmente a caixa de pergunta na página inteira */
         }
 
         .caixa-pergunta label {
@@ -221,35 +226,37 @@
     </ul>
 </nav>
 
-<form onsubmit="event.preventDefault(); BuscarAbrigosPorCidade();" id="buscar-form">
-    <div class="caixa-pergunta">
-    <label for="abrigo_cidade" style="font-size: 18px; margin-right: 10px;">Digite a Cidade:</label>
-    <input type="text" id="abrigo_cidade" name="abrigo_cidade" placeholder="Digite aqui...">
-    <input type="submit" value="Buscar">
-    </div>
-</form>
+<div class="caixa-pergunta-container">
+    <form onsubmit="event.preventDefault(); BuscarAbrigosPorCidade();" id="buscar-form">
+        <div class="caixa-pergunta">
+            <label for="abrigo_cidade" style="font-size: 18px; margin-right: 10px;">Digite a Cidade:</label>
+            <input type="text" id="abrigo_cidade" name="abrigo_cidade" placeholder="Digite aqui...">
+            <input type="submit" value="Buscar">
+        </div>
+    </form>
 
-<table id="tabela-abrigos">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Contato</th>
-        <th>CEP</th>
-        <th>Rua</th>
-        <th>Bairro</th>
-        <th>Cidade</th>
-        <th>Estado</th>
-        <th>NR Abrigo</th>
-        <th>Status</th>
-        <th>Capacidade</th>
-        <th>Responsável</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Os dados serão carregados aqui dinamicamente -->
-    </tbody>
-</table>
+    <table id="tabela-abrigos">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Contato</th>
+            <th>CEP</th>
+            <th>Rua</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>NR Abrigo</th>
+            <th>Status</th>
+            <th>Capacidade</th>
+            <th>Responsável</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Os dados serão carregados aqui dinamicamente -->
+        </tbody>
+    </table>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>

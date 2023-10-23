@@ -62,7 +62,6 @@
         display: block;
     }
 
-
     .dp-menu ul ul li a {
         display: block;
     }
@@ -81,18 +80,15 @@
         text-align: center;
     }
 
-    .form-container .grupo {
-        margin: 10px 0;
-    }
-
-    .form-container .field {
-        margin-bottom: 10px;
+    .form-container label {
+        margin: 0;
     }
 
     .form-container .field .heading {
-        display: block;
+        display: inline-block;
         color: var(--cor-primaria);
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        vertical-align: top;
     }
 
     .form-container .field .input {
@@ -102,6 +98,7 @@
         border: 1px solid var(--cor-primaria);
         border-radius: 5px;
         transition: var(--cor-primaria);
+        margin-bottom: 10px;
     }
 
     .form-container .botao-enviar {
@@ -131,6 +128,17 @@
 
     .form-container .grupo   {
         border: 1px solid var(--cor-linha);
+    }
+
+    .custom-radio {
+        transform: scale(1.5); /* Aumenta o tamanho da bolinha de seleção */
+        margin-right: 10px; /* Espaço entre o radio button e o rótulo */
+    }
+
+    /* Estilo para o rótulo do radio button */
+    .custom-label {
+        color: var(--cor-primaria);
+        font-size: 16px;
     }
 </style>
 
@@ -263,60 +271,60 @@
 
             <div class="field">
                 <span class="heading">Nome</span><br>
-                <input type="text" class="input" id="nome" required>
+                <input type="text" class="input" id="nome" required  placeholder="Informe o Nome do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Contato</span><br>
-                <input type="text" class="input" id="contato" required onblur="formatarContato(this)">
+                <input type="text" class="input" id="contato" required onblur="formatarContato(this)" placeholder="Informe o Contato do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Cep</span><br>
-                <input type="text" class="input" id="cep" required onblur="fetchAddressFromCEP()">
+                <input type="text" class="input" id="cep" required onblur="fetchAddressFromCEP()" placeholder="Informe o CEP do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Rua</span><br>
-                <input type="text" class="input" id="rua" required>
+                <input type="text" class="input" id="rua" required placeholder="Informe o Nome da Rua do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Bairro</span><br>
-                <input type="text" class="input" id="bairro" required>
+                <input type="text" class="input" id="bairro" required placeholder="Informe o Bairro do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Cidade</span><br>
-                <input type="text" class="input" id="cidade" required>
+                <input type="text" class="input" id="cidade" required placeholder="Informe a Cidade do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Estado</span><br>
-                <input type="text" class="input" id="estado" required>
+                <input type="text" class="input" id="estado" required placeholder="Informe o Estado do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Número do Endereço</span><br>
-                <input type="number" class="input" id="nrabrigo" required>
+                <input type="number" class="input" id="nrabrigo" required placeholder="Informe o Número de Endereço do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Status</span><br>
-                <input type="radio" id="statusAtivo" name="status" value="Ativo" required>
-                <label for="statusAtivo" style="color: var(--cor-primaria);">Ativo</label>
-                <input type="radio" id="statusInativo" name="status" value="Inativo" required>
-                <label for="statusInativo" style="color: var(--cor-primaria);">Inativo</label>
+                <input type="radio" id="statusAtivo" name="status" value="Ativo" required class="custom-radio">
+                <label for="statusAtivo" class="custom-label">Ativo</label>
+                <input type="radio" id="statusInativo" name="status" value="Inativo" required class="custom-radio">
+                <label for="statusInativo" class="custom-label">Inativo</label>
             </div>
 
             <div class="field">
                 <span class="heading">Capacidade</span><br>
-                <input type="number" class="input" id="capacidade" required>
+                <input type="number" class="input" id="capacidade" required placeholder="Informe a Capacidade do Abrigo">
             </div>
 
             <div class="field">
                 <span class="heading">Responsável</span><br>
-                <input type="text" class="input" id="responsavel" required>
+                <input type="text" class="input" id="responsavel" required placeholder="Informe o Responsável do Abrigo">
             </div>
 
             <button class="botao-enviar" type="submit">Cadastrar</button>
