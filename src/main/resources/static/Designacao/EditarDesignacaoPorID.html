@@ -20,6 +20,11 @@
             background-color: var(--cor-fundo);
         }
 
+        .dp-menu {
+            display: flex;
+            justify-content: center;
+        }
+
         .dp-menu ul {
             list-style-type: none;
             padding: 0;
@@ -41,6 +46,7 @@
 
         .dp-menu ul a:hover {
             background-color: var(--cor-hover);
+            color: #fff; /* Cor do texto no hover */
         }
 
         /*sub-menu*/
@@ -48,14 +54,11 @@
             display: none;
             left: 0;
             position: absolute;
+            width: 150px;
         }
 
         .dp-menu ul li:hover ul {
             display: block;
-        }
-
-        .dp-menu ul ul {
-            width: 150px;
         }
 
         .dp-menu ul ul li a {
@@ -105,16 +108,17 @@
 
         /* Estilização do formulário */
         #form-editar {
-            max-width: 500px; /* Defina a largura máxima desejada */
-            margin: 20px auto; /* Centraliza o formulário horizontalmente e adiciona margens */
+            max-width: 600px;
+            margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+            background-color: var(--cor-linha);
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
         }
 
         #form-editar h2 {
-            margin-bottom: 20px;
             color: var(--cor-primaria);
+            text-align: center;
         }
 
         #form-editar label {
@@ -123,28 +127,47 @@
             color: var(--cor-primaria);
         }
 
+        #form-editar div {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
         #form-editar input[type="text"] {
-            width: 480px;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            background-color: var(--cor-fundo);
+            width: 96%;
+            padding: 10px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+            transition: var(--cor-primaria);
+            margin-bottom: 10px; /* Aumente o valor para aumentar o espaçamento vertical */
         }
 
         #form-editar button[type="submit"],
         #form-editar button[type="button"] {
-            background-color: var(--cor-hover); /* Cor de fundo no hover */
-            color: #fff; /* Cor do texto branca */
-            padding: 5px 10px; /* Espaçamento interno do botão */
-            cursor: pointer; /* Alterar o cursor para indicar que é clicável */
-            border: none; /* Sem borda */
-            border-radius: 5px; /* Adicione um pequeno raio de borda para arredondar os cantos */
-            transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
+            color: #fff; /* Cor do texto do botão */
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 17px;
+            border-radius: 7px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.5s;
+            transition-property: box-shadow;
+            background: rgb(0, 140, 255);
+            box-shadow: 0 0 25px rgb(0, 140, 255);
         }
 
         #form-editar button[type="submit"]:hover,
         #form-editar button[type="button"]:hover {
-            background-color: var(--cor-primaria);
+            box-shadow: 0 0 5px rgb(0, 140, 255),
+            0 0 25px rgb(0, 140, 255),
+            0 0 50px rgb(0, 140, 255),
+            0 0 100px rgb(0, 140, 255);
         }
     </style>
 </head>
