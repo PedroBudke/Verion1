@@ -20,12 +20,14 @@
             background-color: var(--cor-fundo);
         }
 
-        .dp-menu ul {
-            list-style-type: none;
-            padding: 0;
+        .dp-menu {
+            display: flex;
+            justify-content: center;
         }
 
         .dp-menu ul {
+            list-style-type: none;
+            padding: 0;
             background-color: var(--cor-fundo);
         }
 
@@ -44,6 +46,7 @@
 
         .dp-menu ul a:hover {
             background-color: var(--cor-hover);
+            color: #fff; /* Cor do texto no hover */
         }
 
         /*sub-menu*/
@@ -51,14 +54,11 @@
             display: none;
             left: 0;
             position: absolute;
+            width: 150px;
         }
 
         .dp-menu ul li:hover ul {
             display: block;
-        }
-
-        .dp-menu ul ul {
-            width: 150px;
         }
 
         .dp-menu ul ul li a {
@@ -67,9 +67,8 @@
 
         /* Estilo para a caixa de pergunta */
         .caixa-pergunta {
-            display: flex; /* Tornar os elementos filhos flexíveis */
-            align-items: center; /* Alinhar verticalmente ao centro */
             font-size: 18px;
+            text-align: center; /* Alinhe o texto centralmente */
         }
 
         .caixa-pergunta label {
