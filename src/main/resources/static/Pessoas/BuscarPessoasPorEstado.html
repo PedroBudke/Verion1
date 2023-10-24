@@ -21,12 +21,14 @@
             background-color: var(--cor-fundo);
         }
 
-        .dp-menu ul {
-            list-style-type: none;
-            padding: 0;
+        .dp-menu {
+            display: flex;
+            justify-content: center;
         }
 
         .dp-menu ul {
+            list-style-type: none;
+            padding: 0;
             background-color: var(--cor-fundo);
         }
 
@@ -45,6 +47,7 @@
 
         .dp-menu ul a:hover {
             background-color: var(--cor-hover);
+            color: #fff; /* Cor do texto no hover */
         }
 
         /*sub-menu*/
@@ -52,14 +55,11 @@
             display: none;
             left: 0;
             position: absolute;
+            width: 150px;
         }
 
         .dp-menu ul li:hover ul {
             display: block;
-        }
-
-        .dp-menu ul ul {
-            width: 150px;
         }
 
         .dp-menu ul ul li a {
@@ -68,13 +68,37 @@
 
         /* Estilo para a caixa de pergunta */
         .caixa-pergunta {
-            display: flex;
-            align-items: center;
             font-size: 18px;
+            text-align: center; /* Alinhe o texto centralmente */
         }
 
         .caixa-pergunta label {
-            margin-bottom: 0;
+            margin-bottom: 0; /* Remover espaço abaixo do rótulo */
+        }
+
+        .caixa-pergunta input[type="text"] {
+            background-color: var(--cor-linha);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px; /* Espaço à direita da caixa de entrada para separá-la do botão */
+        }
+
+        /* Estilo para o botão */
+        .caixa-pergunta input[type="submit"] {
+            background-color: var(--cor-primaria); /* Cor de fundo do botão */
+            color: #fff; /* Cor do texto do botão */
+            padding: 10px 20px; /* Espaçamento interno do botão */
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-left: 0; /* Remover espaço à esquerda do botão */
+        }
+
+        /* Estilo para o botão no hover */
+        .caixa-pergunta input[type="submit"]:hover {
+            background-color: var(--cor-hover); /* Cor de fundo no hover do botão */
         }
 
         .pergunta-select {

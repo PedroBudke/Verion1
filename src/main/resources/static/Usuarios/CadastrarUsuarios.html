@@ -59,7 +59,6 @@
             display: block;
         }
 
-
         .dp-menu ul ul li a {
             display: block;
         }
@@ -78,18 +77,15 @@
             text-align: center;
         }
 
-        .form-container .grupo {
-            margin: 10px 0;
-        }
-
-        .form-container .field {
-            margin-bottom: 10px;
+        .form-container label {
+            margin: 0;
         }
 
         .form-container .field .heading {
-            display: block;
+            display: inline-block;
             color: var(--cor-primaria);
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            vertical-align: top;
         }
 
         .form-container .field .input {
@@ -99,6 +95,7 @@
             border: 1px solid var(--cor-primaria);
             border-radius: 5px;
             transition: var(--cor-primaria);
+            margin-bottom: 10px;
         }
 
         .form-container .botao-enviar {
@@ -268,17 +265,17 @@
 
             <div class="field">
                 <span class="heading">CPF</span><br>
-                <input type="text" class="input" id="cpf" required onblur="formatarCPF(this)">
+                <input type="text" class="input" id="cpf" required placeholder="Infome o CPF do Usuário" onblur="formatarCPF(this)">
             </div>
 
             <div class="field">
                 <span class="heading">Email</span><br>
-                <input type="email" class="input" id="email">
+                <input type="email" class="input" id="email" placeholder="Informe o email do Usuário">
             </div>
 
             <div class="field">
                 <span class="heading">Senha</span><br>
-                <input type="text" class="input" id="senha">
+                <input type="text" class="input" id="senha" placeholder="Informe a senha do Usuário">
             </div>
 
             <button class="botao-enviar" type="submit">Cadastrar</button>

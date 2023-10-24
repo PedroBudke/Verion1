@@ -61,7 +61,6 @@
         display: block;
     }
 
-
     .dp-menu ul ul li a {
         display: block;
     }
@@ -80,18 +79,15 @@
         text-align: center;
     }
 
-    .form-container .grupo {
-        margin: 10px 0;
-    }
-
-    .form-container .field {
-        margin-bottom: 10px;
+    .form-container label {
+        margin: 0;
     }
 
     .form-container .field .heading {
-        display: block;
+        display: inline-block;
         color: var(--cor-primaria);
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        vertical-align: top;
     }
 
     .form-container .field .input {
@@ -101,6 +97,7 @@
         border: 1px solid var(--cor-primaria);
         border-radius: 5px;
         transition: var(--cor-primaria);
+        margin-bottom: 10px;
     }
 
     .form-container .botao-enviar {
@@ -304,23 +301,23 @@
         <fieldset class="grupo">
         <h2>Cadastrar Pessoas</h2>
             <div class="field">
-                <span class="heading">Cpf</span><br>
-                <input type="text" class="input" id="cpfpessoa" required onblur="formatarCPF(this)">
+                <span class="heading">CPF</span><br>
+                <input type="text" class="input" id="cpfpessoa" required onblur="formatarCPF(this)" placeholder="Informe o CPF da Pessoa">
             </div>
 
             <div class="field">
                 <span class="heading">Nome</span><br>
-                <input type="text" class="input" id="nome" required>
+                <input type="text" class="input" id="nome" required placeholder="Informe o nome da Pessoa">
             </div>
 
             <div class="field">
                 <span class="heading">Contato</span><br>
-                <input type="text" class="input" id="contato" required onblur="formatarContato(this)">
+                <input type="text" class="input" id="contato" required onblur="formatarContato(this)" placeholder="Informe o contato da Pessoa">
             </div>
 
             <div class="field">
                 <span class="heading">Email</span><br>
-                <input type="text" class="input" id="email" required>
+                <input type="text" class="input" id="email" required placeholder="Informe o email da Pessoa">
             </div>
 
             <div class="field">
@@ -336,47 +333,47 @@
 
             <div class="field">
                 <span class="heading">Data De Nascimento</span><br>
-                <input type="date" class="input" id="datanascimento" required>
+                <input type="date" class="input" id="datanascimento" required placeholder="Informe a Data de Nascimento da Pessoa">
             </div>
 
             <div class="field">
-                <span class="heading">Cep</span><br>
-                <input type="text" class="input" id="cep" required onblur="fetchAddressFromCEP()">
+                <span class="heading">CEP</span><br>
+                <input type="text" class="input" id="cep" required onblur="fetchAddressFromCEP()" placeholder="Infome o cep da Pessoa">
             </div>
 
             <div class="field">
                 <span class="heading">Rua</span><br>
-                <input type="text" class="input" id="rua" required>
+                <input type="text" class="input" id="rua" required placeholder="Informe a rua da Pessoa">
             </div>
 
             <div class="field">
                 <span class="heading">Bairro</span><br>
-                <input type="text" class="input" id="bairro" required>
+                <input type="text" class="input" id="bairro" required placeholder="Informe o Bairro da Pessoa">
             </div>
 
             <div class="field">
                 <span class="heading">Cidade</span><br>
-                <input type="text" class="input" id="cidade" required>
+                <input type="text" class="input" id="cidade" required placeholder="Informe a cidade da Pessoa">
             </div>
 
             <div class="field">
                 <span class="heading">Estado</span><br>
-                <input type="text" class="input" id="estado" required>
+                <input type="text" class="input" id="estado" required placeholder="Informe o estado da Pessoa">
             </div>
 
             <div class="field">
-                <span class="heading">Nr. Residência</span><br>
-                <input type="number" class="input" id="nrresidencia" required>
+                <span class="heading">Número da Residência</span><br>
+                <input type="number" class="input" id="nrresidencia" required placeholder="Informe o número da residência da Pessoa">
             </div>
 
             <div class="field">
-                <span class="heading">Usuario</span><br>
-                <input type="text" class="input" id="usuario" required>
+                <span class="heading">Usuário</span><br>
+                <input type="text" class="input" id="usuario" required placeholder="Informe o Usuário da Pessoa">
             </div>
 
             <div class="field">
                 <span class="heading">Senha</span><br>
-                <input type="text" class="input" id="senha" required>
+                <input type="text" class="input" id="senha" required placeholder="Informe a senha da Pessoa">
             </div>
 
             <button class="botao-enviar" type="submit">Cadastrar</button>
