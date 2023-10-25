@@ -2,9 +2,12 @@ package com.abrigos.DTOs;
 
 import com.abrigos.Classes.Abrigos;
 
+import java.util.Date;
+
 public record AbrigoResponseDTO(Long        abrigo_id,
                                 String      abrigo_nome,
                                 String      abrigo_contato,
+                                Date        abrigo_inauguracao,
                                 String      abrigo_cep,
                                 String      abrigo_rua,
                                 String      abrigo_bairro,
@@ -19,6 +22,7 @@ public record AbrigoResponseDTO(Long        abrigo_id,
         this(   abrigos.getAbrigo_id(),
                 abrigos.getAbrigo_nome(),
                 abrigos.getAbrigo_contato(),
+                abrigos.getAbrigo_inauguracao(),
                 abrigos.getAbrigo_cep(),
                 abrigos.getAbrigo_rua(),
                 abrigos.getAbrigo_bairro(),

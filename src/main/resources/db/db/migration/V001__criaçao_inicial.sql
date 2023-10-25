@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS abrigos (
                                        abrigo_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                                        abrigo_nome VARCHAR(45) NOT NULL,
     abrigo_contato VARCHAR(15) NOT NULL,
+    abrigo_inauguracao DATE NOT NULL,
     abrigo_cep VARCHAR(9) NOT NULL,
     abrigo_rua VARCHAR(45) NOT NULL,
     abrigo_bairro VARCHAR(45) NOT NULL,

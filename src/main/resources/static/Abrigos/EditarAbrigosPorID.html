@@ -322,6 +322,7 @@
         <th>ID</th>
         <th>Nome</th>
         <th>Contato</th>
+        <th>Inauguração</th>
         <th>CEP</th>
         <th>Rua</th>
         <th>Bairro</th>
@@ -349,6 +350,9 @@
 
         <label for="edit-abrigo-contato">Contato</label>
         <input type="text" id="edit-abrigo-contato" name="abrigo_contato" required onblur="formatarContato(this)">
+
+        <label for="edit-abrigo-inauguracao">Data de Inauguração</label>
+        <input type="text" id="edit-abrigo-inauguracao" name="abrigo_nome">
 
         <label for="edit-abrigo-cep">Cep</label>
         <input type="text" id="edit-abrigo-cep" name="abrigo_cep" required onblur="fetchAddressFromCEP()">
@@ -389,10 +393,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
+    function formatarData(data) {
+        const dataObj = new Date(data);
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
+        const ano = dataObj.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
+
+    function formatarDataParaBancoDeDados(data) {
+        const dataObj = new Date(data);
+        const ano = dataObj.getFullYear();
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        return `${ano}-${mes}-${dia}`;
+    }
+
     function preencherFormularioEdicao(abrigos) {
         document.getElementById('edit-abrigo-id').value = abrigos.abrigo_id;
         document.getElementById('edit-abrigo-nome').value = abrigos.abrigo_nome;
         document.getElementById('edit-abrigo-contato').value = abrigos.abrigo_contato;
+        document.getElementById('edit-abrigo-inauguracao').value = formatarData(abrigos.abrigo_inauguracao);
         document.getElementById('edit-abrigo-cep').value = abrigos.abrigo_cep;
         document.getElementById('edit-abrigo-rua').value = abrigos.abrigo_rua;
         document.getElementById('edit-abrigo-bairro').value = abrigos.abrigo_bairro;
@@ -443,6 +465,7 @@
         const abrigo_id = document.getElementById('edit-abrigo-id').value;
         const abrigo_nome = document.getElementById('edit-abrigo-nome').value;
         const abrigo_contato = document.getElementById('edit-abrigo-contato').value;
+        const abrigo_inauguracao = formatarDataParaBancoDeDados(document.getElementById('edit-abrigo-inauguracao').value);
         const abrigo_cep = document.getElementById('edit-abrigo-cep').value;
         const abrigo_rua = document.getElementById('edit-abrigo-rua').value;
         const abrigo_bairro = document.getElementById('edit-abrigo-bairro').value;
@@ -466,6 +489,7 @@
             abrigo_id: abrigo_id,
             abrigo_nome: abrigo_nome,
             abrigo_contato: abrigo_contato,
+            abrigo_inauguracao: abrigo_inauguracao,
             abrigo_cep: abrigo_cep,
             abrigo_rua: abrigo_rua,
             abrigo_bairro: abrigo_bairro,
@@ -499,6 +523,7 @@
                     row.insertCell().innerText = abrigos.abrigo_id;
                     row.insertCell().innerText = abrigos.abrigo_nome;
                     row.insertCell().innerText = abrigos.abrigo_contato;
+                    row.insertCell().innerText = formatarData(abrigos.abrigo_inauguracao);
                     row.insertCell().innerText = abrigos.abrigo_cep;
                     row.insertCell().innerText = abrigos.abrigo_rua;
                     row.insertCell().innerText = abrigos.abrigo_bairro;

@@ -4,6 +4,8 @@ import com.abrigos.DTOs.AbrigoRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Table(name = "abrigos")
 @Entity(name = "abrigos")
 @Getter
@@ -18,6 +20,7 @@ public class Abrigos {
     private     Long        abrigo_id;
     private     String      abrigo_nome;
     private     String      abrigo_contato;
+    private     Date        abrigo_inauguracao;
     private     String      abrigo_cep;//MUDAR NO BANCO PARA VARCHAR
     private     String      abrigo_rua;
     private     String      abrigo_bairro;
@@ -33,6 +36,7 @@ public class Abrigos {
         abrigo_id                   =           data.abrigo_id();
         abrigo_nome                 =           data.abrigo_nome();
         abrigo_contato              =           data.abrigo_contato();
+        abrigo_inauguracao          =           data.abrigo_inauguracao();
         abrigo_cep                  =           data.abrigo_cep();
         abrigo_rua                  =           data.abrigo_rua();
         abrigo_bairro               =           data.abrigo_bairro();

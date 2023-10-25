@@ -280,6 +280,11 @@
             </div>
 
             <div class="field">
+                <span class="heading">Data de Inauguração</span><br>
+                <input type="date" class="input" id="inauguracao" required>
+            </div>
+
+            <div class="field">
                 <span class="heading">Cep</span><br>
                 <input type="text" class="input" id="cep" required onblur="fetchAddressFromCEP()" placeholder="Informe o CEP do Abrigo">
             </div>
@@ -359,6 +364,7 @@
         event.preventDefault();
         const nome = document.getElementById('nome').value;
         const contato = document.getElementById('contato').value;
+        const inauguracao = document.getElementById('inauguracao').value;
         const cep = document.getElementById('cep').value;
         const rua = document.getElementById('rua').value;
         const bairro = document.getElementById('bairro').value;
@@ -381,6 +387,7 @@
         const data = {
             abrigo_nome: nome,
             abrigo_contato: contato,
+            abrigo_inauguracao: inauguracao,
             abrigo_cep: cep,
             abrigo_rua: rua,
             abrigo_bairro: bairro,

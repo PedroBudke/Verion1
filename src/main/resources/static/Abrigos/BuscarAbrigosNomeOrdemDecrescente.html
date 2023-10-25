@@ -193,6 +193,7 @@
         <th>ID</th>
         <th>Nome</th>
         <th>Contato</th>
+        <th>Inauguração</th>
         <th>CEP</th>
         <th>Rua</th>
         <th>Bairro</th>
@@ -210,6 +211,13 @@
 </table>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    function formatarData(data) {
+        const dataObj = new Date(data);
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
+        const ano = dataObj.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
     function BuscarAbrigosNomeOrdemDecrescente() {
         axios.get(`/abrigos/nomeDecrescente`)
             .then(response => {
@@ -222,6 +230,7 @@
                     row.insertCell().innerText = abrigos.abrigo_id;
                     row.insertCell().innerText = abrigos.abrigo_nome;
                     row.insertCell().innerText = abrigos.abrigo_contato;
+                    row.insertCell().innerText = formatarData(abrigos.abrigo_inauguracao);
                     row.insertCell().innerText = abrigos.abrigo_cep;
                     row.insertCell().innerText = abrigos.abrigo_rua;
                     row.insertCell().innerText = abrigos.abrigo_bairro;
