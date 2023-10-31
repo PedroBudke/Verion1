@@ -140,6 +140,40 @@
         color: var(--cor-primaria);
         font-size: 16px;
     }
+
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 50%; /* Ajuste a posição vertical para 50% da tela */
+        left: 50%; /* Ajuste a posição horizontal para 50% da tela */
+        transform: translate(-50%, -50%); /* Centraliza a div */
+        background-color: var(--cor-hover);
+        width: 300px; /* Largura desejada */
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+    #custom-modal-close {
+        background-color: var(--cor-hover); /* Cor de fundo no hover */
+        color: #fff; /* Cor do texto branca */
+        padding: 5px 10px; /* Espaçamento interno do botão */
+        cursor: pointer; /* Alterar o cursor para indicar que é clicável */
+        border: none; /* Sem borda */
+        border-radius: 5px; /* Adicione um pequeno raio de borda para arredondar os cantos */
+    }
+
+    #custom-modal-close:hover {
+        background-color: #FF0000; /* Cor de fundo no hover */
+    }
 </style>
 
 <script>
@@ -152,7 +186,7 @@
         const data = await response.json();
 
         if (data.erro) {
-            alert('CEP não encontrado.');
+            mostrarModal('CEP não encontrado');
         } else {
             document.getElementById('rua').value = data.logradouro;
             document.getElementById('bairro').value = data.bairro;
@@ -170,6 +204,21 @@
         contato = `(${contato.slice(0, 2)}) ${contato.slice(2, 7)}-${contato.slice(7, 11)}`;
         input.value = contato;
     }
+    }
+
+    // Função para mostrar o modal com a mensagem personalizada
+    function mostrarModal(message) {
+        const modal = document.getElementById('custom-modal');
+        const modalMessage = document.getElementById('custom-modal-message');
+
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
+    }
+
+    // Função para ocultar o modal
+    function fecharModal() {
+        const modal = document.getElementById('custom-modal');
+        modal.style.display = 'none';
     }
 </script>
 
@@ -338,6 +387,13 @@
     </form>
 </div>
 
+<div id="custom-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p id="custom-modal-message">Mensagem de alerta personalizada.</p>
+        <button id="custom-modal-close" onclick="fecharModal()">Fechar</button>
+    </div>
+</div>
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
@@ -382,6 +438,14 @@
             status = 'Ativo';
         } else if (statusInativo.checked) {
             status = 'Inativo';
+        }
+
+        const currentDate = new Date();
+        const selectedDate = new Date(inauguracao);
+
+        if (selectedDate > currentDate) {
+            mostrarModal('A Data não pode ser futura');
+            return;
         }
 
         const data = {
