@@ -92,6 +92,106 @@
         tbody tr:nth-child(odd) {
             background-color: var(--cor-linha);
         }
+
+        button {
+            background-color: var(--cor-hover); /* Cor de fundo no hover */
+            color: #fff; /* Cor do texto branca */
+            padding: 5px 10px; /* Espaçamento interno do botão */
+            cursor: pointer; /* Alterar o cursor para indicar que é clicável */
+            border: none; /* Sem borda */
+            border-radius: 5px; /* Adicione um pequeno raio de borda para arredondar os cantos */
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffff00;
+        }
+
+        /* Estilização do formulário */
+        #form-editar {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--cor-linha);
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+        }
+
+        #form-editar h2 {
+            color: var(--cor-primaria);
+            text-align: center;
+        }
+
+        #form-editar label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
+        #form-editar div {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
+        #form-editar input[type="text"] {
+            background-color: var(--cor-fundo);
+            width: 96%;
+            padding: 10px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+            transition: var(--cor-primaria);
+            margin-bottom: 10px; /* Aumente o valor para aumentar o espaçamento vertical */
+        }
+
+        #form-editar button[type="submit"],
+        #form-editar button[type="button"] {
+            display: block;
+            margin: 20px auto;
+            color: #fff; /* Cor do texto do botão */
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 17px;
+            border-radius: 7px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.5s;
+            transition-property: box-shadow;
+            background: rgb(0, 140, 255);
+            box-shadow: 0 0 25px rgb(0, 140, 255);
+        }
+
+        #form-editar button[type="submit"]:hover,
+        #form-editar button[type="button"]:hover {
+            box-shadow: 0 0 5px rgb(0, 140, 255),
+            0 0 25px rgb(0, 140, 255),
+            0 0 50px rgb(0, 140, 255),
+            0 0 100px rgb(0, 140, 255);
+        }
+
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50%; /* Ajuste a posição vertical para 50% da tela */
+            left: 50%; /* Ajuste a posição horizontal para 50% da tela */
+            transform: translate(-50%, -50%); /* Centraliza a div */
+            background-color: var(--cor-hover);
+            width: 300px; /* Largura desejada */
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -190,19 +290,58 @@
 <table id="tabela-atendimentos">
     <thead>
     <tr>
-        <th>ID Atendimento</th>
         <th>ID Abrigo</th>
         <th>ID Pessoa</th>
         <th>Data do Atendimento</th>
         <th>Observação</th>
         <th>Tomada de Decisão</th>
         <th>Responsável</th>
+        <th>Editar</th>
+        <th>Excluir</th>
     </tr>
     </thead>
     <tbody>
     <!-- Os dados serão carregados aqui dinamicamente -->
     </tbody>
 </table>
+
+<div id="form-editar" style="display: none;">
+    <h2>Editar Atendimento</h2>
+    <form onsubmit="salvarEdicao(event)">
+        <!-- Adicione um campo oculto para armazenar o ID do atendimento -->
+        <input type="hidden" id="edit-atendimento-id" name="atendimento_id">
+
+        <label for="edit-abrigo-id">Abrigo Id</label>
+        <input type="text" id="edit-abrigo-id" name="abrigo_id">
+
+        <label for="edit-pessoa-id">Pessoa ID</label>
+        <input type="text" id="edit-pessoa-id" name="pessoa_id">
+
+        <label for="edit-atendimento-data">Atendimento Data</label>
+        <input type="text" id="edit-atendimento-data" name="atendimento_data">
+
+        <label for="edit-observacao">Observação</label>
+        <input type="text" id="edit-observacao" name="observacao">
+
+        <label for="edit-tomadadecisao">Tomada Decisão</label>
+        <input type="text" id="edit-tomadadecisao" name="tomada_decisao">
+
+        <label for="edit-atendimento_responsavel">Responsável</label>
+        <input type="text" id="edit-atendimento_responsavel" name="atendimento_responsavel">
+        <!-- Outros campos de edição aqui -->
+        <button type="submit">Salvar</button>
+        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    </form>
+</div>
+
+<div id="modalExclusao" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p>Tem certeza de que deseja excluir este atednimento?</p>
+        <button id="confirmarExclusao">Sim</button>
+        <button id="cancelarExclusao">Cancelar</button>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     function formatarData(data) {
@@ -212,7 +351,108 @@
         const ano = dataObj.getFullYear();
         return `${dia}/${mes}/${ano}`;
     }
+
+    function formatarDataParaBancoDeDados(data) {
+        const dataObj = new Date(data);
+        const ano = dataObj.getFullYear();
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+        const dia = String(dataObj.getDate()).padStart(2, '0');
+        return `${ano}-${mes}-${dia}`;
+    }
+    function preencherFormularioEdicao(atendimento) {
+        document.getElementById('edit-atendimento-id').value = atendimento.atendimento_id;
+        document.getElementById('edit-abrigo-id').value = atendimento.abrigo_id;
+        document.getElementById('edit-pessoa-id').value = atendimento.pessoa_id;
+        document.getElementById('edit-atendimento-data').value = formatarData(atendimento.atendimento_data);
+        document.getElementById('edit-observacao').value = atendimento.observacao;
+        document.getElementById('edit-tomadadecisao').value = atendimento.tomada_decisao;
+        document.getElementById('edit-atendimento_responsavel').value = atendimento.atendimento_responsavel;
+    }
+
+    function cancelarEdicao() {
+        document.getElementById('form-editar').style.display = 'none';
+        document.getElementById('tabela-atendimentos').style.display= 'table';
+    }
+    function econderTabela() {
+        document.getElementById('tabela-atendimentos').style.display = 'none';
+    }
+
+    function mostrarTabela() {
+        document.getElementById('tabela-atendimentos').style.display = 'table';
+    }
+
+    function editarAtendimento(atendimento_id) {
+        econderTabela();
+        axios.get(`/atendimentos/${atendimento_id}`)
+            .then(response => {
+                const atendimento = response.data;
+                preencherFormularioEdicao(atendimento);
+                document.getElementById('form-editar').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o Atendimento:', error);
+            });
+    }
+
+    function salvarEdicao(event) {
+        event.preventDefault();
+        const atendimento_id = document.getElementById('edit-atendimento-id').value;
+        const abrigo_id = document.getElementById('edit-abrigo-id').value;
+        const pessoa_id = document.getElementById('edit-pessoa-id').value;
+        const atendimento_data = formatarDataParaBancoDeDados(document.getElementById('edit-atendimento-data').value);
+        const observacao = document.getElementById('edit-observacao').value;
+        const tomada_decisao = document.getElementById('edit-tomadadecisao').value;
+        const atendimento_responsavel = document.getElementById('edit-atendimento_responsavel').value;
+
+        // Construa um objeto com os dados que você deseja enviar ao servidor
+        const dadosAtualizados = {
+            atendimento_id: atendimento_id,
+            abrigo_id: abrigo_id,
+            pessoa_id: pessoa_id,
+            atendimento_data: atendimento_data,
+            observacao: observacao,
+            tomada_decisao: tomada_decisao,
+            atendimento_responsavel: atendimento_responsavel,
+        };
+
+        axios.put(`/atendimentos/${atendimento_id}`, dadosAtualizados)
+            .then(response => {
+                BuscarTodosAtendimentos();
+                cancelarEdicao();
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar o Atendimento:', error);
+            });
+    }
+
+    function excluirAtendimentoComConfirmacao(atendimento_id) {
+        const modal = document.getElementById('modalExclusao');
+        modal.style.display = 'block';
+
+        const confirmarExclusao = document.getElementById('confirmarExclusao');
+        const cancelarExclusao = document.getElementById('cancelarExclusao');
+
+        confirmarExclusao.addEventListener('click', () => {
+            modal.style.display = 'none';
+            // Realize a exclusão
+            axios.delete(`/atendimentos/${atendimento_id}`)
+                .then(response => {
+                    // Atualize a tabela após a exclusão
+                    BuscarTodosAtendimentos();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir o Atendimento:', error);
+                    exibirMensagemErro();
+                });
+        });
+
+        cancelarExclusao.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
     function BuscarTodosAtendimentos() {
+        mostrarTabela();
         axios.get(`/atendimentos/todos`)
             .then(response => {
                 const atendimentos = response.data;
@@ -221,7 +461,6 @@
 
                 atendimentos.forEach(atendimentos => {
                     const row = tabela.insertRow();
-                    row.insertCell().innerText = atendimentos.atendimento_id;
                     row.insertCell().innerText = atendimentos.abrigo_id;
                     row.insertCell().innerText = atendimentos.pessoa_id;
                     row.insertCell().innerText = formatarData(atendimentos.atendimento_data);
@@ -229,6 +468,22 @@
                     row.insertCell().innerText = atendimentos.tomada_decisao;
                     row.insertCell().innerText = atendimentos.atendimento_responsavel;
 
+                    // Adicione um botão de edição
+                    const cellEditar = row.insertCell();
+                    const btnEditar = document.createElement('button');
+                    btnEditar.innerText = 'Editar';
+                    btnEditar.addEventListener('click', () => {
+                        editarAtendimento(atendimentos.atendimento_id);
+                    });
+                    cellEditar.appendChild(btnEditar);
+
+                    const cellAcoes = row.insertCell();
+                    const btnExcluir = document.createElement('button');
+                    btnExcluir.textContent = 'Excluir';
+                    btnExcluir.addEventListener('click', () => {
+                        excluirAtendimentoComConfirmacao(atendimentos.atendimento_id);
+                    });
+                    cellAcoes.appendChild(btnExcluir);
                 });
             })
             .catch(error => {

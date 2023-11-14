@@ -92,6 +92,106 @@
         tbody tr:nth-child(odd) {
             background-color: var(--cor-linha);
         }
+
+        button {
+            background-color: var(--cor-hover); /* Cor de fundo no hover */
+            color: #fff; /* Cor do texto branca */
+            padding: 5px 10px; /* Espaçamento interno do botão */
+            cursor: pointer; /* Alterar o cursor para indicar que é clicável */
+            border: none; /* Sem borda */
+            border-radius: 5px; /* Adicione um pequeno raio de borda para arredondar os cantos */
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffff00;
+        }
+
+        /* Estilização do formulário */
+        #form-editar {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--cor-linha);
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+        }
+
+        #form-editar h2 {
+            color: var(--cor-primaria);
+            text-align: center;
+        }
+
+        #form-editar label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
+        #form-editar div {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
+        #form-editar input[type="text"] {
+            background-color: var(--cor-fundo);
+            width: 96%;
+            padding: 10px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+            transition: var(--cor-primaria);
+            margin-bottom: 10px; /* Aumente o valor para aumentar o espaçamento vertical */
+        }
+
+        #form-editar button[type="submit"],
+        #form-editar button[type="button"] {
+            display: block;
+            margin: 20px auto;
+            color: #fff; /* Cor do texto do botão */
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 17px;
+            border-radius: 7px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.5s;
+            transition-property: box-shadow;
+            background: rgb(0, 140, 255);
+            box-shadow: 0 0 25px rgb(0, 140, 255);
+        }
+
+        #form-editar button[type="submit"]:hover,
+        #form-editar button[type="button"]:hover {
+            box-shadow: 0 0 5px rgb(0, 140, 255),
+            0 0 25px rgb(0, 140, 255),
+            0 0 50px rgb(0, 140, 255),
+            0 0 100px rgb(0, 140, 255);
+        }
+
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50%; /* Ajuste a posição vertical para 50% da tela */
+            left: 50%; /* Ajuste a posição horizontal para 50% da tela */
+            transform: translate(-50%, -50%); /* Centraliza a div */
+            background-color: var(--cor-hover);
+            width: 300px; /* Largura desejada */
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -205,12 +305,83 @@
             <th>Estado</th>
             <th>NR Residência</th>
             <th>Usuario</th>
+            <th>Editar</th>
+            <th>Deletar</th>
         </tr>
         </thead>
         <tbody>
         <!-- Os dados serão carregados aqui dinamicamente -->
         </tbody>
     </table>
+
+    <div id="form-editar" style="display: none;">
+        <h2>Editar Pessoas</h2>
+        <form onsubmit="salvarEdicao(event)">
+            <input type="hidden" id="edit-pessoa-id" name="pessoa_id">
+
+            <label for="edit-pessoa-cpf">CPF</label>
+            <input type="text" id="edit-pessoa-cpf" name="pessoa_cpf">
+
+            <label for="edit-pessoa-nome">Nome</label>
+            <input type="text" id="edit-pessoa-nome" name="pessoa_nome">
+
+            <label for="edit-pessoa-contato">Contato</label>
+            <input type="text" id="edit-pessoa-contato" name="pessoa_contato">
+
+            <label for="edit-pessoa-email">Email</label>
+            <input type="text" id="edit-pessoa-email" name="pessoa_email">
+
+            <label for="edit-pessoa-genero">Gênero</label>
+            <input type="text" id="edit-pessoa-genero" name="pessoa_genero">
+
+            <label for="edit-data-nascimento">Data Nascimento</label>
+            <input type="text" id="edit-data-nascimento" name="data_nascimento">
+
+            <label for="edit-pessoa-cep">CEP</label>
+            <input type="text" id="edit-pessoa-cep" name="pessoa_cep">
+
+            <label for="edit-pessoa-rua">Rua</label>
+            <input type="text" id="edit-pessoa-rua" name="pessoa_rua">
+
+            <label for="edit-pessoa-bairro">Bairro</label>
+            <input type="text" id="edit-pessoa-bairro" name="pessoa_bairro">
+
+            <label for="edit-pessoa-cidade">Cidade</label>
+            <input type="text" id="edit-pessoa-cidade" name="pessoa_cidade">
+
+            <label for="edit-pessoa-estado">Estado</label>
+            <input type="text" id="edit-pessoa-estado" name="pessoa_estado">
+
+            <label for="edit-pessoa-nr-residencia">Número da Residência</label>
+            <input type="text" id="edit-pessoa-nr-residencia" name="pessoa_nr_residencia">
+
+            <label for="edit-pessoa-usuario">Usuário</label>
+            <input type="text" id="edit-pessoa-usuario" name="pessoa_usuario">
+
+            <label for="edit-pessoa-senha">Senha</label>
+            <input type="text" id="edit-pessoa-senha" name="pessoa_senha">
+
+            <!-- Outros campos de edição aqui -->
+            <button type="submit">Salvar</button>
+            <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+        </form>
+    </div>
+
+    <div id="modalExclusao" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p>Tem certeza de que deseja excluir esta pessoa?</p>
+            <button id="confirmarExclusao">Sim</button>
+            <button id="cancelarExclusao">Cancelar</button>
+        </div>
+    </div>
+
+    <div id="mensagemErro" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p>Esta pessoa não pode ser excluída pois tem um vinculo em outra tabela.</p>
+        <button id="fecharMensagemErro">Fechar</button>
+    </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
 
@@ -220,6 +391,145 @@
             const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Lembre-se que os meses em JavaScript são base 0
             const ano = dataObj.getFullYear();
             return `${dia}/${mes}/${ano}`;
+        }
+
+        function formatarDataParaBancoDeDados(data) {
+            const partes = data.split('/');
+            if (partes.length === 3) {
+                const [dia, mes, ano] = partes;
+                return `${ano}-${mes}-${dia}`;
+            } else {
+                // Se a data não estiver no formato esperado, retorne a string original
+                return data;
+            }
+        }
+
+        function preencherFormularioEdicao(pessoas) {
+            document.getElementById('edit-pessoa-id').value = pessoas.pessoa_id;
+            document.getElementById('edit-pessoa-cpf').value = pessoas.pessoa_cpf;
+            document.getElementById('edit-pessoa-nome').value = pessoas.pessoa_nome;
+            document.getElementById('edit-pessoa-contato').value = pessoas.pessoa_contato;
+            document.getElementById('edit-pessoa-email').value = pessoas.pessoa_email;
+            document.getElementById('edit-pessoa-genero').value = pessoas.pessoa_genero;
+            document.getElementById('edit-data-nascimento').value = formatarData(pessoas.data_nascimento);
+            document.getElementById('edit-pessoa-cep').value = pessoas.pessoa_cep;
+            document.getElementById('edit-pessoa-rua').value = pessoas.pessoa_rua;
+            document.getElementById('edit-pessoa-bairro').value = pessoas.pessoa_bairro;
+            document.getElementById('edit-pessoa-cidade').value = pessoas.pessoa_cidade;
+            document.getElementById('edit-pessoa-estado').value = pessoas.pessoa_estado;
+            document.getElementById('edit-pessoa-nr-residencia').value = pessoas.pessoa_nr_residencia;
+            document.getElementById('edit-pessoa-usuario').value = pessoas.pessoa_usuario;
+            document.getElementById('edit-pessoa-senha').value = pessoas.pessoa_senha;
+
+        }
+
+        function cancelarEdicao() {
+            document.getElementById('form-editar').style.display = 'none';
+            document.getElementById('tabela-pessoas').style.display= 'table';
+        }
+        function econderTabela() {
+            document.getElementById('tabela-pessoas').style.display = 'none';
+        }
+
+        function mostrarTabela() {
+            document.getElementById('tabela-pessoas').style.display = 'table';
+        }
+
+        function editarPessoa(pessoa_id) {
+            econderTabela();
+            axios.get(`/pessoas/${pessoa_id}`)
+                .then(response => {
+                    const pessoa = response.data;
+                    preencherFormularioEdicao(pessoa);
+                    document.getElementById('form-editar').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar a Pessoa:', error);
+                });
+        }
+
+        function salvarEdicao(event) {
+            event.preventDefault();
+            const pessoa_id = document.getElementById('edit-pessoa-id').value;
+            const pessoa_cpf = document.getElementById('edit-pessoa-cpf').value;
+            const pessoa_nome = document.getElementById('edit-pessoa-nome').value;
+            const pessoa_contato = document.getElementById('edit-pessoa-contato').value;
+            const pessoa_email = document.getElementById('edit-pessoa-email').value;
+            const pessoa_genero = document.getElementById('edit-pessoa-genero').value;
+            const data_nascimento = formatarDataParaBancoDeDados(document.getElementById('edit-data-nascimento').value);
+            const pessoa_cep = document.getElementById('edit-pessoa-cep').value;
+            const pessoa_rua = document.getElementById('edit-pessoa-rua').value;
+            const pessoa_bairro = document.getElementById('edit-pessoa-bairro').value;
+            const pessoa_cidade = document.getElementById('edit-pessoa-cidade').value;
+            const pessoa_estado = document.getElementById('edit-pessoa-estado').value;
+            const pessoa_nr_residencia = document.getElementById('edit-pessoa-nr-residencia').value;
+            const pessoa_usuario = document.getElementById('edit-pessoa-usuario').value;
+            const pessoa_senha = document.getElementById('edit-pessoa-senha').value;
+
+            // Construa um objeto com os dados que você deseja enviar ao servidor
+            const dadosAtualizados = {
+                pessoa_id: pessoa_id,
+                pessoa_cpf: pessoa_cpf,
+                pessoa_nome: pessoa_nome,
+                pessoa_contato: pessoa_contato,
+                pessoa_email: pessoa_email,
+                pessoa_genero: pessoa_genero,
+                data_nascimento: data_nascimento,
+                pessoa_cep: pessoa_cep,
+                pessoa_rua: pessoa_rua,
+                pessoa_bairro: pessoa_bairro,
+                pessoa_cidade: pessoa_cidade,
+                pessoa_estado: pessoa_estado,
+                pessoa_nr_residencia: pessoa_nr_residencia,
+                pessoa_usuario: pessoa_usuario,
+                pessoa_senha: pessoa_senha,
+            };
+
+            axios.put(`/pessoas/${pessoa_id}`, dadosAtualizados)
+                .then(response => {
+                    BuscarTodasPessoas();
+                    cancelarEdicao();
+                })
+                .catch(error => {
+                    console.error('Erro ao atualizar a Pessoa:', error);
+                });
+        }
+
+        function exibirMensagemErro() {
+            const modalErro = document.getElementById('mensagemErro');
+            modalErro.style.display = 'block';
+
+            const fecharMensagemErro = document.getElementById('fecharMensagemErro');
+
+            fecharMensagemErro.addEventListener('click', () => {
+                modalErro.style.display = 'none';
+            });
+        }
+        // Função para exibir o modal de exclusão
+        function excluirPessoasComConfirmacao(pessoa_id) {
+            const modal = document.getElementById('modalExclusao');
+            modal.style.display = 'block';
+
+            const confirmarExclusao = document.getElementById('confirmarExclusao');
+            const cancelarExclusao = document.getElementById('cancelarExclusao');
+
+            confirmarExclusao.addEventListener('click', () => {
+                modal.style.display = 'none';
+                // Realize a exclusão
+                axios.delete(`/pessoas/${pessoa_id}`)
+                    .then(response => {
+                        // Atualize a tabela após a exclusão
+                        BuscarTodasPessoas();
+                    })
+                    .catch(error => {
+                        console.error('Erro ao excluir a Pessoa:', error);
+                        exibirMensagemErro();
+                    });
+            });
+
+            cancelarExclusao.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
         }
 
         function BuscarTodasPessoas() {
@@ -245,6 +555,23 @@
                         row.insertCell().innerText = pessoas.pessoa_estado;
                         row.insertCell().innerText = pessoas.pessoa_nr_residencia;
                         row.insertCell().innerText = pessoas.pessoa_usuario;
+
+                        // Adicione um botão de edição
+                        const cellEditar = row.insertCell();
+                        const btnEditar = document.createElement('button');
+                        btnEditar.innerText = 'Editar';
+                        btnEditar.addEventListener('click', () => {
+                            editarPessoa(pessoas.pessoa_id);
+                        });
+                        cellEditar.appendChild(btnEditar);
+
+                        const cellAcoes = row.insertCell();
+                        const btnExcluir = document.createElement('button');
+                        btnExcluir.textContent = 'Excluir';
+                        btnExcluir.addEventListener('click', () => {
+                            excluirPessoasComConfirmacao(pessoas.pessoa_id);
+                        });
+                        cellAcoes.appendChild(btnExcluir);
                     });
                 })
                 .catch(error => {

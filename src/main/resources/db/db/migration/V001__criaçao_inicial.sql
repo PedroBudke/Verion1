@@ -1,4 +1,6 @@
-
+CREATE DATABASE IF NOT EXISTS abrigos;
+USE abrigos;
+-- Criação da Tabela de Abrigos
 CREATE TABLE IF NOT EXISTS abrigos (
                                        abrigo_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                                        abrigo_nome VARCHAR(45) NOT NULL,
@@ -12,8 +14,10 @@ CREATE TABLE IF NOT EXISTS abrigos (
     abrigo_nr_abrigos INT NOT NULL,
     abrigo_status VARCHAR(45) NOT NULL,
     abrigo_capacidade INT NOT NULL,
-    abrigo_responsavel VARCHAR(45) NOT NULL);
+    abrigo_responsavel VARCHAR(45) NOT NULL
+    );
 
+-- Criação da Tabela de Pessoas
 CREATE TABLE IF NOT EXISTS pessoas (
                                        pessoa_id INT PRIMARY KEY AUTO_INCREMENT,
                                        pessoa_cpf VARCHAR(14) NULL,
@@ -29,8 +33,10 @@ CREATE TABLE IF NOT EXISTS pessoas (
     pessoa_estado VARCHAR(2) NULL,
     pessoa_nr_residencia INT NULL,
     pessoa_usuario VARCHAR(45) NOT NULL,
-    pessoa_senha VARCHAR(45) NOT NULL);
+    pessoa_senha VARCHAR(45) NOT NULL
+    );
 
+-- Criação da Tabela de Atendimentos
 CREATE TABLE IF NOT EXISTS atendimentos (
                                             atendimento_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                                             pessoa_id INT NOT NULL,
@@ -51,6 +57,7 @@ CREATE TABLE IF NOT EXISTS atendimentos (
     ON UPDATE NO ACTION
     );
 
+-- Criação da Tabela de Usuários
 CREATE TABLE IF NOT EXISTS usuarios (
                                         usuario_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                                         usuario_cpf VARCHAR(45) NOT NULL,
@@ -58,15 +65,21 @@ CREATE TABLE IF NOT EXISTS usuarios (
     usuario_senha VARCHAR(45) NOT NULL
     );
 
+-- Criação da Tabela de Designação
 CREATE TABLE IF NOT EXISTS designacao (
                                           designacao_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                                           abrigo_id INT NOT NULL,
                                           pessoa_id INT NOT NULL,
                                           designacao_data DATE NOT NULL,
-                                          designacao_responsavel VARCHAR(45)
+                                          designacao_responsavel VARCHAR(45),
+    CONSTRAINT fk_abrigo_designacao
+    FOREIGN KEY (abrigo_id)
+    REFERENCES abrigos (abrigo_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT fk_pessoa_designacao
+    FOREIGN KEY (pessoa_id)
+    REFERENCES pessoas (pessoa_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
     );
-
-
-
-
-

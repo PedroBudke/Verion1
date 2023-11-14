@@ -92,6 +92,127 @@
         tbody tr:nth-child(odd) {
             background-color: var(--cor-linha);
         }
+
+        button {
+            background-color: var(--cor-hover); /* Cor de fundo no hover */
+            color: #fff; /* Cor do texto branca */
+            padding: 5px 10px; /* Espaçamento interno do botão */
+            cursor: pointer; /* Alterar o cursor para indicar que é clicável */
+            border: none; /* Sem borda */
+            border-radius: 5px; /* Adicione um pequeno raio de borda para arredondar os cantos */
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffff00;
+        }
+
+        /* Estilização do formulário */
+        #form-editar {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--cor-linha);
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+        }
+
+        #form-editar h2 {
+            color: var(--cor-primaria);
+            text-align: center;
+        }
+
+        #form-editar label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
+        #form-editar div {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-primaria);
+        }
+
+        #form-editar .field {
+            margin-bottom: 10px;
+        }
+
+        #form-editar input[type="text"] {
+            background-color: var(--cor-fundo);
+            width: 96%;
+            padding: 10px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+            transition: var(--cor-primaria);
+            margin-bottom: 10px; /* Aumente o valor para aumentar o espaçamento vertical */
+        }
+
+        #form-editar button[type="submit"],
+        #form-editar button[type="button"] {
+            display: block;
+            margin: 20px auto;
+            color: #fff; /* Cor do texto do botão */
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 17px;
+            border-radius: 7px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.5s;
+            transition-property: box-shadow;
+            background: rgb(0, 140, 255);
+            box-shadow: 0 0 25px rgb(0, 140, 255);
+        }
+
+        #form-editar button[type="submit"]:hover,
+        #form-editar button[type="button"]:hover {
+            box-shadow: 0 0 5px rgb(0, 140, 255),
+            0 0 25px rgb(0, 140, 255),
+            0 0 50px rgb(0, 140, 255),
+            0 0 100px rgb(0, 140, 255);
+        }
+
+        .field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .custom-radio {
+            transform: scale(1.5); /* Aumenta o tamanho da bolinha de seleção */
+            margin-right: 10px; /* Espaço entre o radio button e o rótulo */
+        }
+
+        /* Estilo para o rótulo do radio button */
+        .custom-label {
+            color: var(--cor-primaria);
+            font-size: 16px;
+        }
+
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50%; /* Ajuste a posição vertical para 50% da tela */
+            left: 50%; /* Ajuste a posição horizontal para 50% da tela */
+            transform: translate(-50%, -50%); /* Centraliza a div */
+            background-color: var(--cor-hover);
+            width: 300px; /* Largura desejada */
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -191,7 +312,6 @@
 <table id="tabela-abrigos">
     <thead>
     <tr>
-        <th>ID</th>
         <th>Nome</th>
         <th>Contato</th>
         <th>Inauguração</th>
@@ -204,14 +324,84 @@
         <th>Status</th>
         <th>Capacidade</th>
         <th>Responsável</th>
+        <th>Editar</th>
+        <th>Deletar</th>
     </tr>
     </thead>
     <tbody>
     <!-- Os dados serão carregados aqui dinamicamente -->
     </tbody>
 </table>
+
+<div id="form-editar" class="form-container" style="display: none;">
+    <h2>Editar Abrigo</h2>
+    <form onsubmit="salvarEdicao(event)">
+        <input type="hidden" id="edit-abrigo-id" name="abrigo_id">
+
+        <label for="edit-abrigo-nome">Nome</label>
+        <input type="text" id="edit-abrigo-nome" name="abrigo_nome">
+
+        <label for="edit-abrigo-contato">Contato</label>
+        <input type="text" id="edit-abrigo-contato" name="abrigo_contato" required onblur="formatarContato(this)">
+
+        <label for="edit-abrigo-inauguracao">Data de Inauguração</label>
+        <input type="text" id="edit-abrigo-inauguracao" name="abrigo_inauguracao">
+
+        <label for="edit-abrigo-cep">Cep</label>
+        <input type="text" id="edit-abrigo-cep" name="abrigo_cep" required onblur="fetchAddressFromCEP()">
+
+        <label for="edit-abrigo-rua">Rua</label>
+        <input type="text" id="edit-abrigo-rua" name="abrigo_rua">
+
+        <label for="edit-abrigo-bairro">Bairro</label>
+        <input type="text" id="edit-abrigo-bairro" name="abrigo_bairro">
+
+        <label for="edit-abrigo-cidade">Cidade</label>
+        <input type="text" id="edit-abrigo-cidade" name="abrigo_cidade">
+
+        <label for="edit-abrigo-estado">Estado</label>
+        <input type="text" id="edit-abrigo-estado" name="abrigo_estado">
+
+        <label for="edit-abrigo-nr-abrigos">Número do Endereço:</label>
+        <input type="text" id="edit-abrigo-nr-abrigos" name="abrigo_nr_abrigos">
+
+        <div class="field">
+            <span class="heading">Status</span><br><br>
+            <input type="radio" id="statusAtivo" name="status" value="Ativo" required class="custom-radio" style="display: inline-block;">
+            <label for="statusAtivo" class="custom-label" style="display: inline-block;">Ativo</label>
+            <input type="radio" id="statusInativo" name="status" value="Inativo" required class="custom-radio" style="display: inline-block;">
+            <label for="statusInativo" class="custom-label" style="display: inline-block;">Inativo</label>
+        </div>
+
+        <label for="edit-abrigo-capacidade">Capacidade</label>
+        <input type="text" id="edit-abrigo-capacidade" name="abrigo_capacidade">
+
+        <label for="edit-abrigo-responsavel">Responsável</label>
+        <input type="text" id="edit-abrigo-responsavel" name="abrigo_responsavel">
+
+        <button type="submit" class="botao-enviar">Salvar</button>
+        <button type="button" class="botao-enviar" onclick="cancelarEdicao()">Cancelar</button>
+    </form>
+</div>
+
+<div id="modalExclusao" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p>Tem certeza de que deseja excluir este Abrigo?</p>
+        <button id="confirmarExclusao">Sim</button>
+        <button id="cancelarExclusao">Cancelar</button>
+    </div>
+</div>
+
+<div id="mensagemErro" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p>Este Abrigo não pode ser excluído pois tem um vinculo em outra tabela.</p>
+        <button id="fecharMensagemErro">Fechar</button>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
     function formatarData(data) {
         const dataObj = new Date(data);
         const dia = String(dataObj.getDate()).padStart(2, '0');
@@ -219,16 +409,164 @@
         const ano = dataObj.getFullYear();
         return `${dia}/${mes}/${ano}`;
     }
+
+    function formatarDataParaBancoDeDados(data) {
+        const partes = data.split('/');
+        if (partes.length === 3) {
+            const [dia, mes, ano] = partes;
+            return `${ano}-${mes}-${dia}`;
+        } else {
+            // Se a data não estiver no formato esperado, retorne a string original
+            return data;
+        }
+    }
+    function preencherFormularioEdicao(abrigos) {
+        document.getElementById('edit-abrigo-id').value = abrigos.abrigo_id;
+        document.getElementById('edit-abrigo-nome').value = abrigos.abrigo_nome;
+        document.getElementById('edit-abrigo-contato').value = abrigos.abrigo_contato;
+        document.getElementById('edit-abrigo-inauguracao').value = formatarData(abrigos.abrigo_inauguracao);
+        document.getElementById('edit-abrigo-cep').value = abrigos.abrigo_cep;
+        document.getElementById('edit-abrigo-rua').value = abrigos.abrigo_rua;
+        document.getElementById('edit-abrigo-bairro').value = abrigos.abrigo_bairro;
+        document.getElementById('edit-abrigo-cidade').value = abrigos.abrigo_cidade;
+        document.getElementById('edit-abrigo-estado').value = abrigos.abrigo_estado;
+        document.getElementById('edit-abrigo-nr-abrigos').value = abrigos.abrigo_nr_abrigos;
+        const ativoCheckbox = document.getElementById('statusAtivo');
+        const inativoCheckbox = document.getElementById('statusInativo');
+
+        if (abrigos.abrigo_status === 'Ativo') {
+            ativoCheckbox.checked = true;
+            inativoCheckbox.checked = false;
+        } else if (abrigos.abrigo_status === 'Inativo') {
+            ativoCheckbox.checked = false;
+            inativoCheckbox.checked = true;
+        }
+        document.getElementById('edit-abrigo-capacidade').value = abrigos.abrigo_capacidade;
+        document.getElementById('edit-abrigo-responsavel').value = abrigos.abrigo_responsavel;
+    }
+
+    function cancelarEdicao() {
+        document.getElementById('form-editar').style.display = 'none';
+        document.getElementById('tabela-abrigos').style.display= 'table';
+    }
+    function econderTabela() {
+        document.getElementById('tabela-abrigos').style.display = 'none';
+    }
+
+    function mostrarTabela() {
+        document.getElementById('tabela-abrigos').style.display = 'table';
+    }
+
+    function editarAbrigo(abrigo_id) {
+        econderTabela();
+        axios.get(`/abrigos/${abrigo_id}`)
+            .then(response => {
+                const abrigo = response.data;
+                preencherFormularioEdicao(abrigo);
+                document.getElementById('form-editar').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o Abrigo:', error);
+            });
+    }
+
+    function salvarEdicao(event) {
+        event.preventDefault();
+        const abrigo_id = document.getElementById('edit-abrigo-id').value;
+        const abrigo_nome = document.getElementById('edit-abrigo-nome').value;
+        const abrigo_contato = document.getElementById('edit-abrigo-contato').value;
+        const abrigo_inauguracao = formatarDataParaBancoDeDados(document.getElementById('edit-abrigo-inauguracao').value);
+        const abrigo_cep = document.getElementById('edit-abrigo-cep').value;
+        const abrigo_rua = document.getElementById('edit-abrigo-rua').value;
+        const abrigo_bairro = document.getElementById('edit-abrigo-bairro').value;
+        const abrigo_cidade = document.getElementById('edit-abrigo-cidade').value;
+        const abrigo_estado = document.getElementById('edit-abrigo-estado').value;
+        const abrigo_nr_abrigos = document.getElementById('edit-abrigo-nr-abrigos').value;
+
+        let abrigo_status = 'Ativo'; // Valor padrão se nenhuma checkbox for marcada
+        const statusAtivo = document.getElementById('statusAtivo');
+        const statusInativo = document.getElementById('statusInativo');
+
+        if (statusInativo.checked) {
+            abrigo_status = 'Inativo';
+        }
+
+        const abrigo_capacidade = document.getElementById('edit-abrigo-capacidade').value;
+        const abrigo_responsavel = document.getElementById('edit-abrigo-responsavel').value;
+
+        // Construa um objeto com os dados que você deseja enviar ao servidor
+        const dadosAtualizados = {
+            abrigo_id: abrigo_id,
+            abrigo_nome: abrigo_nome,
+            abrigo_contato: abrigo_contato,
+            abrigo_inauguracao: abrigo_inauguracao,
+            abrigo_cep: abrigo_cep,
+            abrigo_rua: abrigo_rua,
+            abrigo_bairro: abrigo_bairro,
+            abrigo_cidade: abrigo_cidade,
+            abrigo_estado: abrigo_estado,
+            abrigo_nr_abrigos: abrigo_nr_abrigos,
+            abrigo_status: abrigo_status,
+            abrigo_capacidade: abrigo_capacidade,
+            abrigo_responsavel: abrigo_responsavel
+        };
+
+        axios.put(`/abrigos/${abrigo_id}`, dadosAtualizados)
+            .then(response => {
+                BuscarTodosAbrigos();
+                cancelarEdicao();
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar o Abrigo:', error);
+            });
+    }
+
+
+    function exibirMensagemErro() {
+        const modalErro = document.getElementById('mensagemErro');
+        modalErro.style.display = 'block';
+
+        const fecharMensagemErro = document.getElementById('fecharMensagemErro');
+
+        fecharMensagemErro.addEventListener('click', () => {
+            modalErro.style.display = 'none';
+        });
+    }
+    // Função para exibir o modal de exclusão
+    function excluirAbrigoComConfirmacao(abrigo_id) {
+        const modal = document.getElementById('modalExclusao');
+        modal.style.display = 'block';
+
+        const confirmarExclusao = document.getElementById('confirmarExclusao');
+        const cancelarExclusao = document.getElementById('cancelarExclusao');
+
+        confirmarExclusao.addEventListener('click', () => {
+            modal.style.display = 'none';
+            // Realize a exclusão
+            axios.delete(`/abrigos/${abrigo_id}`)
+                .then(response => {
+                    // Atualize a tabela após a exclusão
+                    BuscarTodosAbrigos();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir o Abrigo:', error);
+                    exibirMensagemErro();
+                });
+        });
+
+        cancelarExclusao.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
     function BuscarTodosAbrigos() {
+        mostrarTabela();
         axios.get(`/abrigos/todos`)
             .then(response => {
                 const abrigos = response.data;
                 const tabela = document.getElementById('tabela-abrigos').getElementsByTagName('tbody')[0];
-                tabela.innerHTML = ''; // Limpar a tabela antes de preencher com os novos dados
-
+                tabela.innerHTML = '';
                 abrigos.forEach(abrigos => {
                     const row = tabela.insertRow();
-                    row.insertCell().innerText = abrigos.abrigo_id;
                     row.insertCell().innerText = abrigos.abrigo_nome;
                     row.insertCell().innerText = abrigos.abrigo_contato;
                     row.insertCell().innerText = formatarData(abrigos.abrigo_inauguracao);
@@ -241,6 +579,24 @@
                     row.insertCell().innerText = abrigos.abrigo_status;
                     row.insertCell().innerText = abrigos.abrigo_capacidade;
                     row.insertCell().innerText = abrigos.abrigo_responsavel;
+
+                    // Adicione um botão de edição
+                    const cellEditar = row.insertCell();
+                    const btnEditar = document.createElement('button');
+                    btnEditar.innerText = 'Editar';
+                    btnEditar.addEventListener('click', () => {
+                        editarAbrigo(abrigos.abrigo_id);
+                    });
+                    cellEditar.appendChild(btnEditar);
+
+                    // Adicionar um botão de exclusão
+                    const cellAcoes = row.insertCell();
+                    const btnExcluir = document.createElement('button');
+                    btnExcluir.textContent = 'Excluir';
+                    btnExcluir.addEventListener('click', () => {
+                        excluirAbrigoComConfirmacao(abrigos.abrigo_id);
+                    });
+                    cellAcoes.appendChild(btnExcluir);
                 });
             })
             .catch(error => {
