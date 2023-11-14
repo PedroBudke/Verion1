@@ -291,7 +291,6 @@
     <table id="tabela-pessoas">
         <thead>
         <tr>
-            <th>ID</th>
             <th>CPF</th>
             <th>Nome</th>
             <th>Contato</th>
@@ -541,7 +540,6 @@
 
                     pessoas.forEach(pessoas => {
                         const row = tabela.insertRow();
-                        row.insertCell().innerText = pessoas.pessoa_id;
                         row.insertCell().innerText = pessoas.pessoa_cpf;
                         row.insertCell().innerText = pessoas.pessoa_nome;
                         row.insertCell().innerText = pessoas.pessoa_contato;

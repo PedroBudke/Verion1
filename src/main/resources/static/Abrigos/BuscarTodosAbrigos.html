@@ -314,13 +314,12 @@
     <tr>
         <th>Nome</th>
         <th>Contato</th>
-        <th>Inauguração</th>
         <th>CEP</th>
         <th>Rua</th>
         <th>Bairro</th>
         <th>Cidade</th>
         <th>Estado</th>
-        <th>NR Abrigo</th>
+        <th>Número</th>
         <th>Status</th>
         <th>Capacidade</th>
         <th>Responsável</th>
@@ -569,7 +568,6 @@
                     const row = tabela.insertRow();
                     row.insertCell().innerText = abrigos.abrigo_nome;
                     row.insertCell().innerText = abrigos.abrigo_contato;
-                    row.insertCell().innerText = formatarData(abrigos.abrigo_inauguracao);
                     row.insertCell().innerText = abrigos.abrigo_cep;
                     row.insertCell().innerText = abrigos.abrigo_rua;
                     row.insertCell().innerText = abrigos.abrigo_bairro;
